@@ -33,7 +33,7 @@
 /* Enforce a single, consistent UI font across the app */
 html, body, h1, h2, h3, h4, h5, h6,
 button, input, select, textarea, a, span, div, p, li,
-.header, .title, .main-header-bar, .main-header-title,
+.header, .title, .main-header-bar, .main-header-title, .desktop-only
 .sidebar, .sidebar-group, .sidebar-group-title, .sidebar-btn-new,
 .right-support-group, .right-support-title, .right-btn,
 .center-welcome-container, .center-welcome-title, .center-welcome-desc,
@@ -54,19 +54,68 @@ button, input, select, textarea, a, span, div, p, li,
 body {
   background: var(--main-bg); 
   padding-top: 80px !important;
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  position: relative;
 }
 
 .header {
-  background: var(--header-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #a009d7; /* Match FYEO logo purple */
+  border-radius: 20px;
+  padding: 24px 48px 24px 24px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+  margin-bottom: 48px;
+  position: static;
+  min-width: 700px;
+  margin-top: 48px;
+  align-self: center;
+  background: var(--form-bg);
 }
 
 .title {
-  color: var(--header-title);
+  font-size: 4em;
+  color: #ffffff;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  text-shadow: 0 2px 8px rgba(80,80,120,0.12);
+  line-height: 1.1;
 }
 
 .image-container {
-  background: var(--image-bg);
+ width: 100%;
+max-width: 700px; /* Match header width */
+font-family: 'Segoe UI', Arial, sans-serif;
+height: auto;
+background: #7a07a8;
+border-radius: 20px;
+box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+margin: 40px auto 0 auto; /* Center horizontally, add top margin */
+padding: 32px 0; /* Add vertical padding for better appearance */
+background: var(--form-bg);
 }
+
+.desktop-only{
+  display: inline-block
+}
+
+@media(max-width: 1000px){
+  .desktop-only {
+    display: none !important
+  }
+}
+
+
 
 .sidebar {
   width: 260px;
@@ -168,274 +217,236 @@ body.dark-mode {
   --announcement-text: #fff;
 }
 
-    body {
-      background: var(--main-bg);
-      min-height: 100vh;
-      margin: 0;
-      display: flex;
-      flex-direction: row;
-      align-items: flex-start;
-      position: relative;
-      padding-top: 80px !important; 
-    }
-    .main-content {
-      margin-left: auto !important;
-      margin-right: auto !important;
-      /* Remove or override any fixed margin-left/margin-right */
-      width: 100%;
-      max-width: 1100px;
-      box-sizing: border-box;
-      margin-top: 32px;
-      background: var(--main-bg);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-    }
-    @media (max-width: 1100px) {
-      .main-content {
-        margin-left: auto !important;
-        margin-right: auto !important;
-        max-width: 100vw;
-        padding: 0 2vw;
-      }
-    }
-    @media (max-width: 900px) {
-      .main-content {
-        margin-left: auto !important;
-        margin-right: auto !important;
-        max-width: 100vw;
-        padding: 0 2vw;
-        align-items: center;
-      }
-    }
-    .header {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #a009d7; /* Match FYEO logo purple */
-      border-radius: 20px;
-      padding: 24px 48px 24px 24px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.12);
-      margin-bottom: 48px;
-      position: static;
-      min-width: 700px;
-      margin-top: 48px;
-      align-self: center;
-      background: var(--form-bg);
-    }
-    .logo {
-      width: 180px;
-      height: 112px;
-      border-radius: 12px;
-      margin-right: 40px;
-      background: transparent;
-      box-shadow: none;
-      padding: 0;
-    }
-    .title {
-      font-size: 4em;
-      color: #ffffff;
-      font-weight: bold;
-      letter-spacing: 1.5px;
-      font-family: 'Segoe UI', Arial, sans-serif;
-      text-shadow: 0 2px 8px rgba(80,80,120,0.12);
-      line-height: 1.1;
-    }
 
-    .image-container {
-      width: 100%;
-      max-width: 700px; /* Match header width */
-      font-family: 'Segoe UI', Arial, sans-serif;
-      height: auto;
-      background: #7a07a8;
-      border-radius: 20px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      margin: 40px auto 0 auto; /* Center horizontally, add top margin */
-      padding: 32px 0; /* Add vertical padding for better appearance */
-      background: var(--form-bg);
-    }
-    .sidebar {
-      width: 260px;
-      padding-top: 8px;
-      padding-bottom: 16px;
-      min-height: 0;
-      max-height: calc(100vh - 80px); /* Subtract header height */
-      background: #1b3698;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      box-shadow: -2px 0 16px rgba(80,0,120,0.08);
-      position: fixed;
-      left: 0;
-      top: 80px; /* Push below header */
-      z-index: 100;
-      overflow-y: auto;
-      overscroll-behavior: contain;
-    }
-    .sidebar-title {
-      color: #fff;
-      font-size: 2.2em;
-      font-weight: bold;
-      margin-bottom: 18px;
-      font-family: 'Segoe UI', Arial, sans-serif;
-      letter-spacing: 1px;
-      text-align: center;
-    }
-    .sidebar-btn {
-      width: 90%;
-      margin: 10px 0;
-      padding: 14px 0;
-      background: #a009d7;
-      color: #fff;
-      border: none;
-      border-radius: 10px;
-      font-size: 1.1em;
-      font-family: 'Segoe UI', Arial, sans-serif;
-      font-weight: 500;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.2s;
-      box-shadow: 0 2px 8px rgba(80,0,120,0.08);
-    }
-    .sidebar-btn:hover {
-      background: #7a07a8;
-      transform: translateY(-2px) scale(1.03);
-    }
-    @media (max-width: 1100px) {
-      .main-content {
-        margin-left: 0;
-        margin-right: 0;
-        max-width: 100vw;
-        padding: 0 2vw;
-      }
-      .center-form-card {
-        max-width: 98vw;
-        padding: 18px 2vw;
-      }
-    }
-    @media (max-width: 900px) {
-      body {
-        flex-direction: column;
-      }
-      .sidebar {
-        position: static;
-        width: 100vw;
-        min-height: unset;
-        max-height: unset;         /* Add this line */
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        padding: 12px 0 0 0;
-        box-shadow: none;
-        overflow-y: visible;       /* Add this line */
-      }
-      .sidebar-title {
-        font-size: 1.3em;
-        margin-bottom: 8px;
-      }
-      .sidebar-btn {
-        width: 90vw;
-        max-width: 300px;
-        margin: 6px 4vw;
-        font-size: 1em;
-      }
-      .main-content {
-        margin-left: 0;
-        margin-right: 0;
-        max-width: 100vw;
-        padding: 0 2vw;
-        align-items: center;
-      }
-      .center-form-card {
-        flex-direction: column;
-        gap: 18px;
-        padding: 18px 2vw;
-        max-width: 100vw;
-      }
-      .center-welcome-container {
-        max-width: 98vw;
-        padding: 0 2vw;
-      }
-    }
-    @media (max-width: 600px) {
-      .main-content {
-        padding: 0 1vw;
-      }
-      .center-form-card,
-      .center-welcome-container {
-        padding: 0 1vw;
-        max-width: 100vw;
-      }
-    }
-    .main-content {
-      margin-right: 280px; /* space for sidebar */
-      background: var(--main-bg) !important; /* this will now be white */
-    }
-    @media (max-width: 900px) {
-      .main-content {
-        margin-right: 0;
-      }
-    }
-    .logo-btn {
-      cursor: pointer;
-      transition: box-shadow 0.2s, transform 0.2s, border 0.2s;
-      border: 3px solid transparent;
-    }
-    .logo-btn:active {
-      transform: scale(0.96);
-      box-shadow: 0 0 0 2px #fff, 0 2px 12px rgba(80,0,120,0.18);
-      border: 3px solid #fff;
-    }
-    .logo-btn:hover, .logo-btn:focus {
-      box-shadow: 0 0 0 3px #fff, 0 4px 16px rgba(80,0,120,0.18);
-      border: 3px solid #fff;
-      outline: none;
-    }
+.main-content {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  /* Remove or override any fixed margin-left/margin-right */
+  width: 100%;
+  max-width: 1100px;
+  box-sizing: border-box;
+  margin-top: 32px;
+  background: var(--main-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+@media (max-width: 1100px) {
+  .main-content {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    max-width: 100vw;
+    padding: 0 2vw;
+  }
+}
+@media (max-width: 900px) {
+  .main-content {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    max-width: 100vw;
+    padding: 0 2vw;
+    align-items: center;
+    position: sticky;
+    
+  }
+}
+/* .header {
+  
+} */
+.logo {
+  width: 180px;
+  height: 112px;
+  border-radius: 12px;
+  margin-right: 40px;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+}
+/* .title {
+  
+} */
 
-    /* Fade and slide-in animation */
-    .slide-fade {
-      opacity: 0;
-      transform: translateY(40px);
-      animation: slideFadeIn 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-    }
-    /* Staggered animation for children */
-    .slide-fade.delay-1 { animation-delay: 0.15s; }
-    .slide-fade.delay-2 { animation-delay: 0.3s; }
-    .slide-fade.delay-3 { animation-delay: 0.45s; }
-    .slide-fade.delay-4 { animation-delay: 0.6s; }
-    .slide-fade.delay-5 { animation-delay: 0.75s; }
-    .slide-fade.delay-6 { animation-delay: 0.9s; }
+/* .image-container {
+  
+} */
+.sidebar {
+  width: 260px;
+  padding-top: 8px;
+  padding-bottom: 16px;
+  min-height: 0;
+  max-height: calc(100vh - 80px); /* Subtract header height */
+  background: #1b3698;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: -2px 0 16px rgba(80,0,120,0.08);
+  position: fixed;
+  left: 0;
+  top: 80px; /* Push below header */
+  z-index: 100;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.sidebar-title {
+  color: #fff;
+  font-size: 2.2em;
+  font-weight: bold;
+  margin-bottom: 18px;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  letter-spacing: 1px;
+  text-align: center;
+}
+.sidebar-btn {
+  width: 90%;
+  margin: 10px 0;
+  padding: 14px 0;
+  background: #a009d7;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1em;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  box-shadow: 0 2px 8px rgba(80,0,120,0.08);
+}
+.sidebar-btn:hover {
+  background: #7a07a8;
+  transform: translateY(-2px) scale(1.03);
+}
+@media (max-width: 1100px) {
+  /* .main-content {
+    margin-left: 0;
+    margin-right: 0;
+    max-width: 100vw;
+    padding: 0 2vw;
+  } */
+  .center-form-card {
+    max-width: 98vw;
+    padding: 18px 2vw;
+  }
+}
+@media (max-width: 900px) {
+  body {
+    flex-direction: column;
+  }
+  .sidebar {
+    position: static;
+    width: 100vw;
+    min-height: unset;
+    max-height: unset;         /* Add this line */
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 12px 0 0 0;
+    box-shadow: none;
+    overflow-y: visible;       /* Add this line */
+  }
+  .sidebar-title {
+    font-size: 1.3em;
+    margin-bottom: 8px;
+  }
+  .sidebar-btn {
+    width: 90vw;
+    max-width: 300px;
+    margin: 6px 4vw;
+    font-size: 1em;
+  }
+  .main-content {
+    margin-left: 0;
+    margin-right: 0;
+    max-width: 100vw;
+    padding: 0 2vw;
+    align-items: center;
+  }
+  .center-form-card {
+    flex-direction: column;
+    gap: 18px;
+    padding: 18px 2vw;
+    max-width: 100vw;
+  }
+  .center-welcome-container {
+    max-width: 98vw;
+    padding: 0 2vw;
+  }
+}
+@media (max-width: 600px) {
+  .main-content {
+    padding: 0 1vw;
+  }
+  .center-form-card,
+  .center-welcome-container {
+    padding: 0 1vw;
+    max-width: 100vw;
+  }
+}
+.main-content {
+  margin-right: 280px; /* space for sidebar */
+  background: var(--main-bg) !important; /* this will now be white */
+}
+@media (max-width: 900px) {
+  .main-content {
+    margin-right: 0;
+  }
+}
+.logo-btn {
+  cursor: pointer;
+  transition: box-shadow 0.2s, transform 0.2s, border 0.2s;
+  border: 3px solid transparent;
+}
+.logo-btn:active {
+  transform: scale(0.96);
+  box-shadow: 0 0 0 2px #fff, 0 2px 12px rgba(80,0,120,0.18);
+  border: 3px solid #fff;
+}
+.logo-btn:hover, .logo-btn:focus {
+  box-shadow: 0 0 0 3px #fff, 0 4px 16px rgba(80,0,120,0.18);
+  border: 3px solid #fff;
+  outline: none;
+}
 
-    @keyframes slideFadeIn {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    .announcement-overlay {
-      position: absolute;
-      left: 24px;
-      top: 158px; /* Adjusted from 155px to 145px */
-      min-width: 260px;
-      max-width: 340px;
-      background: rgba(160, 9, 215, 0.97);
-      color: #fff;
-      font-family: 'Segoe UI', Arial, sans-serif;
-      font-size: 1.08em;
-      border-radius: 10px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.13);
-      padding: 11px 18px;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.35s cubic-bezier(0.23, 1, 0.32, 1);
-      z-index: 10;
-      margin-top: 8px;
-      display: block;
-    }
+/* Fade and slide-in animation */
+.slide-fade {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: slideFadeIn 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+/* Staggered animation for children */
+.slide-fade.delay-1 { animation-delay: 0.15s; }
+.slide-fade.delay-2 { animation-delay: 0.3s; }
+.slide-fade.delay-3 { animation-delay: 0.45s; }
+.slide-fade.delay-4 { animation-delay: 0.6s; }
+.slide-fade.delay-5 { animation-delay: 0.75s; }
+.slide-fade.delay-6 { animation-delay: 0.9s; }
+
+@keyframes slideFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.announcement-overlay {
+  position: absolute;
+  left: 24px;
+  top: 158px; /* Adjusted from 155px to 145px */
+  min-width: 260px;
+  max-width: 340px;
+  background: rgba(160, 9, 215, 0.97);
+  color: #fff;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-size: 1.08em;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.13);
+  padding: 11px 18px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+  z-index: 10;
+  margin-top: 8px;
+  display: block;
+}
 
     /* Show overlay on logo hover */
     .header:hover #announcement-overlay,
@@ -579,6 +590,13 @@ body.dark-mode {
 
 .step-accordion.open .step-content {
   display: block;
+}
+
+#calculator-img{
+  width: 65px;
+  height: 65px;
+  object-fit: contain;
+  border-radius: 6px;
 }
 .logo-bg-column {
   position: fixed;
@@ -842,6 +860,7 @@ body.dark-mode .fyeo-announcements-content {
   width: 100vw;
   background: #8a24a8;
   display: flex;
+  position: fixed;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
@@ -853,6 +872,7 @@ body.dark-mode .fyeo-announcements-content {
   top: 0;
   left: 0;
   height: 80px;
+  overflow-y: auto;
 }
 
 .main-header-left {
@@ -873,6 +893,7 @@ body.dark-mode .fyeo-announcements-content {
   font-weight: bold;
   font-family: 'Segoe UI', Arial, sans-serif;
   letter-spacing: 1px;
+  object-fit: contain;
 }
 
 .main-header-actions {
@@ -1211,7 +1232,7 @@ body.dark-mode .fyeo-announcements-content {
     box-sizing: border-box;
   }
 }
-@media (max-width: 480px) {
+@media (max-width: 1100px) {
   /* Make header and page flow naturally on small screens */
   .main-header-bar {
     padding: 12px 14px;
@@ -1225,12 +1246,12 @@ body.dark-mode .fyeo-announcements-content {
     line-height: 1.1;
     white-space: normal;
   }
-  .main-header-actions {
+  /* .main-header-actions {
     gap: 10px;
-    display: none;
-    flex-wrap: wrap;
+    display: flexbox;
+    flex-wrap: nowrap;
     justify-content: flex-end;
-  }
+  } */
   .main-header-btn {
     padding: 8px 10px;
     font-size: 0.95em;
@@ -1315,17 +1336,17 @@ body.dark-mode .fyeo-announcements-content {
   html, body { overflow-x: hidden; }
 }
 /* Also include a slightly larger breakpoint to catch small tablets */
-@media (min-width: 481px) and (max-width: 900px) {
+/* @media (min-width: 481px) and (max-width: 900px) {
   .main-header-title { font-size: 1.3em; }
   .main-header-actions { flex-wrap: wrap; gap: 10px; }
   .logo-bg-column { display: none; }
   .main-content { padding: 12px 20px 40px; margin-right: 0; }
   .center-form-card { padding: 18px; max-width: 94vw; }
   .sidebar { position: static; width: 100%; box-shadow: none; flex-direction: row; flex-wrap: wrap; justify-content:center; }
-}
+} */
 
 /* ==== Mobile support drawer (approx. < 7" = 672px) ==== */
-@media (max-width: 672px) {
+@media (max-width: 1000px) {
   /* Hide sidebar and right column when using the drawer */
   .sidebar { display: none !important; }
   .logo-bg-column { display: none !important; }
@@ -1440,5 +1461,4 @@ body.dark-mode .fyeo-announcements-content {
   margin-bottom: 12px;
 }
 
-/* Hide toggle by default (desktop), show only in mobile breakpoint above) */
-#support-menu-toggle { display: none; }
+

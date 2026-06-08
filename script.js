@@ -827,110 +827,110 @@ document.getElementById('timeline-breakdown').innerHTML = '';
 });
 
 // Mobile support drawer logic (clones existing sidebar and right-support groups)
-// (() => {
-// const TOGGLE_ID = 'support-menu-toggle';
-// const DRAWER_ID = 'support-drawer';
-// const DRAWER_CONTENT_ID = 'support-drawer-content';
-// const MOBILE_BREAKPOINT_PX = 672; // ~7 inches at 96dpi
+(() => {
+const TOGGLE_ID = 'support-menu-toggle';
+const DRAWER_ID = 'support-drawer';
+const DRAWER_CONTENT_ID = 'support-drawer-content';
+const MOBILE_BREAKPOINT_PX = 1000; // ~7 inches at 96dpi
 
-// const toggleBtn = document.getElementById(TOGGLE_ID);
-// const drawer = document.getElementById(DRAWER_ID);
-// const drawerContent = document.getElementById(DRAWER_CONTENT_ID);
-// const bodyEl = document.body;
-// const sidebar = document.querySelector('.sidebar');
-// const rightColumn = document.querySelector('.logo-bg-column');
+const toggleBtn = document.getElementById(TOGGLE_ID);
+const drawer = document.getElementById(DRAWER_ID);
+const drawerContent = document.getElementById(DRAWER_CONTENT_ID);
+const bodyEl = document.body;
+const sidebar = document.querySelector('.sidebar');
+const rightColumn = document.querySelector('.logo-bg-column');
 
-// function openDrawer() {
-//   if (!drawerContent.hasChildNodes()) {
-//     // Clone sidebar groups
-//     if (sidebar) {
-//       sidebar.querySelectorAll('.sidebar-group').forEach(g => {
-//         const copy = g.cloneNode(true);
-//         // remove any layout-only width to fit drawer
-//         copy.style.width = '100%';
-//         drawerContent.appendChild(copy);
-//       });
-//     }
-//     // Clone right-support groups
-//     if (rightColumn) {
-//       rightColumn.querySelectorAll('.right-support-group').forEach(g => {
-//         const copy = g.cloneNode(true);
-//         copy.style.width = '100%';
-//         drawerContent.appendChild(copy);
-//       });
-//     }
-//     // Move any standalone buttons (like footer block) into drawer
-//     if (rightColumn) {
-//       const footer = rightColumn.querySelector('[style*="First-Year\\nEngineering\\nOffice"]');
-//       if (footer) drawerContent.appendChild(footer.cloneNode(true));
-//     }
-//     // cloned inline onclick attributes stay functional; ensure links open in new tab
-//     drawerContent.querySelectorAll('button[onclick]').forEach(btn => {
-//       // nothing to change - inline onclick will work on clones
-//     });
-//   }
+function openDrawer() {
+  if (!drawerContent.hasChildNodes()) {
+    // Clone sidebar groups
+    if (sidebar) {
+      sidebar.querySelectorAll('.sidebar-group').forEach(g => {
+        const copy = g.cloneNode(true);
+        // remove any layout-only width to fit drawer
+        copy.style.width = '100%';
+        drawerContent.appendChild(copy);
+      });
+    }
+    // Clone right-support groups
+    if (rightColumn) {
+      rightColumn.querySelectorAll('.right-support-group').forEach(g => {
+        const copy = g.cloneNode(true);
+        copy.style.width = '100%';
+        drawerContent.appendChild(copy);
+      });
+    }
+    // Move any standalone buttons (like footer block) into drawer
+    if (rightColumn) {
+      const footer = rightColumn.querySelector('[style*="First-Year\\nEngineering\\nOffice"]');
+      if (footer) drawerContent.appendChild(footer.cloneNode(true));
+    }
+    // cloned inline onclick attributes stay functional; ensure links open in new tab
+    drawerContent.querySelectorAll('button[onclick]').forEach(btn => {
+      // nothing to change - inline onclick will work on clones
+    });
+  }
 
-//   drawer.classList.add('active');
-//   drawer.setAttribute('aria-hidden', 'false');
-//   if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'true');
-//   bodyEl.classList.add('support-drawer-open');
-//   // Focus management
-//   const closeBtn = drawer.querySelector('[data-action="close"]');
-//   if (closeBtn) closeBtn.focus();
-// }
+  // drawer.classList.add('active');
+  // // drawer.setAttribute('aria-hidden', 'false');
+  // if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'true');
+  // bodyEl.classList.add('support-drawer-open');
+  // // Focus management
+  // const closeBtn = drawer.querySelector('[data-action="close"]');
+  // if (closeBtn) closeBtn.focus();
+}
 
-// function closeDrawer() {
-//   drawer.classList.remove('active');
-//   drawer.setAttribute('aria-hidden', 'true');
-//   if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'false');
-//   bodyEl.classList.remove('support-drawer-open');
-//   if (toggleBtn) toggleBtn.focus();
-// }
+function closeDrawer() {
+  drawer.classList.remove('active');
+  drawer.setAttribute('aria-hidden', 'true');
+  if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'false');
+  bodyEl.classList.remove('support-drawer-open');
+  if (toggleBtn) toggleBtn.focus();
+}
 
-// // Toggle handler
-// if (toggleBtn && drawer) {
-//   toggleBtn.addEventListener('click', () => {
-//     const isOpen = drawer.classList.contains('active');
-//     if (isOpen) closeDrawer(); else openDrawer();
-//   });
-// }
+// Toggle handler
+if (toggleBtn && drawer) {
+  toggleBtn.addEventListener('click', () => {
+    const isOpen = drawer.classList.contains('active');
+    if (isOpen) closeDrawer(); else openDrawer();
+  });
+}
 
-// // Close buttons and backdrop
-// drawer.addEventListener('click', (ev) => {
-//   const action = ev.target.closest('[data-action]');
-//   if (action) {
-//     if (action.dataset.action === 'close' || action.dataset.action === 'backdrop') {
-//       closeDrawer();
-//     }
-//   }
-// });
+// Close buttons and backdrop
+drawer.addEventListener('click', (ev) => {
+  const action = ev.target.closest('[data-action]');
+  if (action) {
+    if (action.dataset.action === 'close' || action.dataset.action === 'backdrop') {
+      closeDrawer();
+    }
+  }
+});
 
-// // Close on escape
-// window.addEventListener('keydown', (e) => {
-//   if (e.key === 'Escape' && drawer.classList.contains('active')) {
-//     closeDrawer();
-//   }
-// });
+// Close on escape
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && drawer.classList.contains('active')) {
+    closeDrawer();
+  }
+});
 
-// // Auto close if user resizes above breakpoint
-// window.addEventListener('resize', () => {
-//   if (window.innerWidth > MOBILE_BREAKPOINT_PX && drawer.classList.contains('active')) {
-//     closeDrawer();
-//   }
-// });
+// Auto close if user resizes above breakpoint
+window.addEventListener('resize', () => {
+  if (window.innerWidth > MOBILE_BREAKPOINT_PX && drawer.classList.contains('active')) {
+    closeDrawer();
+  }
+});
 
-// // Ensure toggle button is hidden on larger screens initially
-// function updateToggleVisibility() {
-//   if (!toggleBtn) return;
-//   if (window.innerWidth <= MOBILE_BREAKPOINT_PX) {
-//     toggleBtn.style.display = '';
-//   } else {
-//     toggleBtn.style.display = 'none';
-//   }
-// }
-// updateToggleVisibility();
-// window.addEventListener('resize', updateToggleVisibility);
-// })();
+// Ensure toggle button is hidden on larger screens initially
+function updateToggleVisibility() {
+  if (!toggleBtn) return;
+  if (window.innerWidth <= MOBILE_BREAKPOINT_PX) {
+    toggleBtn.style.display = '';
+  } else {
+    toggleBtn.style.display = 'none';
+  }
+}
+updateToggleVisibility();
+window.addEventListener('resize', updateToggleVisibility);
+})();
 
 (function(){
   const toggle = document.getElementById('support-menu-toggle');

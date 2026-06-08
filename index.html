@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
   <meta charset="UTF-8">
-  <link rel="icon" href="FYEOFavicon.png" type="image/png">
+  <link rel="icon" href="FYEOFavicon.png" type=" /png">
   <link rel="stylesheet" href="style.css">
   <script src ="script.js" defer></script>
   <!-- <script src="CalendarLogic.js"></script> -->
@@ -19,28 +19,29 @@
       <span class="main-header-title">CEN100 Assignment Calculator</span>
     </div>
     <div class="main-header-actions">
-      <button class="main-header-btn" onclick="window.open('https://www.torontomu.ca/calendar/2025-2026/dates/', '_blank')">📅 Significant Dates Calendar</button>
-      <button class="main-header-btn" onclick="window.open('https://www.torontomu.ca/first-year-engineering-office/', '_blank')">📍 First-Year Engineering Office</button>
-      <button class="main-header-btn" onclick="window.open('https://www.torontomu.ca/first-year-engineering-office/faq/', '_blank')">❓ FAQs</button>
+      <button class="main-header-btn desktop-only" onclick="window.open('https://www.torontomu.ca/calendar/2025-2026/dates/', '_blank')">📅 Significant Dates Calendar</button>
+      <button class="main-header-btn desktop-only" onclick="window.open('https://www.torontomu.ca/first-year-engineering-office/', '_blank')">📍 First-Year Engineering Office</button>
+      <button class="main-header-btn desktop-only" onclick="window.open('https://www.torontomu.ca/first-year-engineering-office/faq/', '_blank')">❓ FAQs</button>
       <!-- Mobile-only support drawer toggle (shown via CSS at small widths) -->
       <button id="support-menu-toggle" class="main-header-btn" aria-controls="support-drawer" aria-expanded="false" title="Support menu">☰ Support</button>
-    </div>
-  </div>
-  <!-- Support drawer (mobile) - content is cloned from existing sidebar and right-support groups -->
-  <div id="support-drawer" role="dialog" aria-modal="true" aria-hidden="false">
-    <div class="support-backdrop" tabindex="-1" data-action="backdrop"></div>
-    <div class="support-panel" role="document" aria-labelledby="support-drawer-title">
-      <div class="drawer-header">
-        <div id="support-drawer-title" style="font-weight:bold;font-size:1.15em;">Support & Resources</div>
-        <div>
-          <button class="drawer-close" aria-label="Close support menu" data-action="close">✕</button>
+      <div id="support-drawer" role="dialog" aria-modal="true" aria-hidden="false">
+        <div class="support-backdrop" tabindex="-1" data-action="backdrop"></div>
+        <div class="support-panel" role="document" aria-labelledby="support-drawer-title">
+          <div class="drawer-header">
+            <div id="support-drawer-title" style="font-weight:bold;font-size:1.15em;">Support & Resources</div>
+          <div>
+            <button class="drawer-close" aria-label="Close support menu" data-action="close">✕</button>
+          </div>
         </div>
-      </div>
-      <div class="drawer-content" id="support-drawer-content" aria-live="polite">
+        <div class="drawer-content" id="support-drawer-content" aria-live="polite">
         <!-- Cloned support groups will be inserted here on first open -->
       </div>
     </div>
   </div>
+    </div>
+  </div>
+  <!-- Support drawer (mobile) - content is cloned from existing sidebar and right-support groups -->
+  
   <!-- Right column with centered logo -->
   <div class="logo-bg-column">
     <div class="right-support-group" style="background:#fff; box-shadow:0 2px 8px rgba(80,0,120,0.10); border-radius:16px; margin-top:24px;">
