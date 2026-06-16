@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
   <meta charset="UTF-8">
-  <link rel="icon" href="FYEOFavicon.png" type=" /png">
+  <link rel="icon" href="FYEOFavicon.png" type="image/png">
   <link rel="stylesheet" href="style.css">
   <script src ="script.js" defer></script>
   <!-- <script src="CalendarLogic.js"></script> -->
@@ -14,16 +14,16 @@
   <div class="main-header-bar">
     <div class="main-header-left">
       <span class="main-header-icon" aria-hidden="true">
-        <img id="calculator-img" src="newcalculatorlogo.png" alt="Calculator" style="width:65px;height:65px;object-fit:contain;border-radius:6px;">
+        <img id="calculator-img" src="newcalculatorlogo.png" alt="Calculator">
       </span>
       <span class="main-header-title">CEN100 Assignment Calculator</span>
     </div>
     <div class="main-header-actions">
-      <button class="main-header-btn desktop-only" onclick="window.open('https://www.torontomu.ca/calendar/2025-2026/dates/', '_blank')">📅 Significant Dates Calendar</button>
-      <button class="main-header-btn desktop-only" onclick="window.open('https://www.torontomu.ca/first-year-engineering-office/', '_blank')">📍 First-Year Engineering Office</button>
-      <button class="main-header-btn desktop-only" onclick="window.open('https://www.torontomu.ca/first-year-engineering-office/faq/', '_blank')">❓ FAQs</button>
+      <button class="btn btn-yellow desktop-only" onclick="window.open('https://www.torontomu.ca/calendar/2025-2026/dates/', '_blank')">📅 Significant Dates Calendar</button>
+      <button class="btn btn-yellow desktop-only" onclick="window.open('https://www.torontomu.ca/first-year-engineering-office/', '_blank')">📍 First-Year Engineering Office</button>
+      <button class="btn btn-yellow desktop-only" onclick="window.open('https://www.torontomu.ca/first-year-engineering-office/faq/', '_blank')">❓ FAQs</button>
       <!-- Mobile-only support drawer toggle (shown via CSS at small widths) -->
-      <button id="support-menu-toggle" class="main-header-btn" aria-controls="support-drawer" aria-expanded="false" title="Support menu">☰ Support</button>
+      <button id="support-menu-toggle" class="btn btn-yellow" aria-controls="support-drawer" aria-expanded="false" title="Support menu">☰ Support</button>
       <div id="support-drawer" role="dialog" aria-modal="true" aria-hidden="false">
         <div class="support-backdrop" tabindex="-1" data-action="backdrop"></div>
         <div class="support-panel" role="document" aria-labelledby="support-drawer-title">
@@ -44,124 +44,122 @@
   
   <!-- Right column with centered logo -->
   <div class="logo-bg-column">
-    <div class="right-support-group" style="background:#fff; box-shadow:0 2px 8px rgba(80,0,120,0.10); border-radius:16px; margin-top:24px;">
-      <div class="right-support-title" style="color:#222; font-size:1.5em; font-weight:bold; margin-bottom:16px; display:flex; align-items:center;">
-        <span class="emoji" style="font-size:1.2em; margin-right:8px;">➕</span> Additional Support
+    <div class="right-support-group" >
+      <div class="right-support-title">
+        <span class="emoji" style="font-size:1.2em; margin-right:8px;">➕ Additional Support </span>
       </div>
-      <button class="right-btn right-btn-yellow" style="background:#ffe14d; color:#222; font-weight:600; font-size:1.13em; margin-bottom:12px;" onclick="window.open('https://www.torontomu.ca/first-year-engineering-office/current-students/eng-handbook/', '_blank')">Student Handbook</button>
-      <button class="right-btn right-btn-yellow" style="background:#ffe14d; color:#222; font-weight:600; font-size:1.13em; margin-bottom:12px;" onclick="window.open('https://www.torontomu.ca/first-year-engineering-office/orientation/first-year-ambassadors/', '_blank')">First-Year Ambassador</button>
-      <button class="right-btn right-btn-yellow" style="background:#ffe14d; color:#222; font-weight:600; font-size:1.13em;" onclick="window.open('https://apps.apple.com/ca/app/fyeng-mobile/id1148681745', '_blank')">FYEng Mobile App</button>
+      <button class="btn btn-yellow" onclick="window.open('https://www.torontomu.ca/first-year-engineering-office/current-students/eng-handbook/', '_blank')">Student Handbook</button>
+      <button class="btn btn-yellow" onclick="window.open('https://www.torontomu.ca/first-year-engineering-office/orientation/first-year-ambassadors/', '_blank')">First-Year Ambassador</button>
+      <button class="btn btn-yellow" onclick="window.open('https://apps.apple.com/ca/app/fyeng-mobile/id1148681745', '_blank')">FYEng Mobile App</button>
     </div>
-    <div class="right-support-group" style="background:#fff; box-shadow:0 2px 8px rgba(80,0,120,0.10); border-radius:16px;">
+    <div class="right-support-group">
       <div class="right-support-title" style="color:#222; font-size:1.5em; font-weight:bold; margin-bottom:16px; display:flex; align-items:center; flex-wrap:wrap;">
         <span class="emoji" style="font-size:1.2em; margin-right:8px;">🏫</span>
         <span style="display:inline-block;">Group Assignment/CEN100 Support</span>
       </div>
-      <button class="right-btn right-btn-blue" style="background:#1857b8; color:#fff; font-weight:600; font-size:1.13em; margin-bottom:12px;" onclick="window.open('https://www.torontomu.ca/policies/policy-list/conflict-interest-policy/', '_blank')">Best Practices for Group Conflict</button>
-      <button class="right-btn right-btn-blue" style="background:#1857b8; color:#fff; font-weight:600; font-size:1.13em; margin-bottom:12px;" onclick="window.open('https://www.torontomu.ca/contact/student/', '_blank')">CEN100 Contact</button>
+      <button class="btn btn-blue"  onclick="window.open('https://www.torontomu.ca/policies/policy-list/conflict-interest-policy/', '_blank')">Best Practices for Group Conflict</button>
+      <button class="btn btn-blue" onclick="window.open('https://www.torontomu.ca/contact/student/', '_blank')">CEN100 Contact</button>
     </div>
-    <div style="margin-top:36px; width:90%; display:flex; align-items:flex-end;">
-      <span style="display:inline-block; width:6px; height:56px; background:#444; border-radius:3px; margin-right:14px;"></span>
-      <span style="font-size:1.55em; font-weight:bold; color:#444; font-family:'Segoe UI', Arial, sans-serif; line-height:1.1; letter-spacing:0.5px;">
-        First-Year<br>Engineering<br>Office
+    <div class="right-fyeo-footer">
+        <span style="display:inline-block; width:6px; height:56px; background:#444; border-radius:3px; margin-right:14px;"></span>
+        <span class="footer-text">
+          First-Year<br>Engineering<br>Office
       </span>
     </div>
   </div>
-  <div style="display: flex; flex-direction: row; align-items: flex-start; width: 100%;">
-    <div class="main-content slide-fade delay-1">
-      <div class="center-welcome-container">
-    <div class="center-welcome-title">Welcome!</div>
-    <div class="center-welcome-desc">
-      Plan your assignment with ease.<br>
-      Select your course, assignment type, start and due date to generate a personalized timeline.
+ 
+  <div class="main-content">
+    <div class="center-welcome-container">
+      <div class="center-welcome-title">Welcome!</div>
+      <div class="center-welcome-desc">
+        Plan your assignment with ease.<br>
+        Select your course, assignment type, start and due date to btn yellow a personalized timeline.
+      </div>
     </div>
-    <div class="center-stepper">
-      <div class="step active"><span>1</span> Assignment Info</div>
-      <div class="step"><span>2</span> Generate Timeline</div>
-      <div class="step"><span>3</span> Review &amp; Save</div>
-    </div>
-    <div class="center-form-card">
-      <form id="assignment-form">
-        <div class="assignment-controls">
-          <div class="form-row">
-            <label for="assignment-select">Select Assignment</label>
-            <select id="assignment-select">
-              <option value="">-- Choose an assignment --</option>
-              <option value="email">Professional Email Assignment</option>
-              <option value="notebook">Personal Design Notebook</option>
-              <option value="whmis">WHMIS Certification</option>
-              <option value="matlab">MATLAB Assignments</option>
-              <option value="disaster">Engineering Disaster Project</option>
-              <option value="reverse">Reverse Engineering Project</option>
-              <option value="final">Final Exam</option>
-            </select>
-          </div>
-          <div class="form-row">
-            <label>Start Date</label>
-            <input type="text" id="start-date" readonly placeholder="Select from calendar">
-          </div>
-          <div class="form-row">
-            <label>Due Date</label>
-            <input type="text" id="due-date" readonly placeholder="Select from calendar">
-          </div>
+  <div class="center-stepper">
+    <div class="step active"><span>1</span> Assignment Info</div>
+    <div class="step"><span>2</span> Generate Timeline</div>
+    <div class="step"><span>3</span> Review &amp; Save</div>
+  </div>
+  <div class="center-form-card">
+    <form id="assignment-form">
+      <div class="assignment-controls">
+        <div class="form-row">
+          <label for ="assignment-select">Select Assignment</label>
+          <select id="assignment-select">
+            <option value="">-- Choose an assignment --</option>
+            <option value="email">Professional Email Assignment</option>
+            <option value="notebook">Personal Design Notebook</option>
+            <option value="whmis">WHMIS Certification</option>
+            <option value="matlab">MATLAB Assignments</option>
+            <option value="disaster">Engineering Disaster Project</option>
+            <option value="reverse">Reverse Engineering Project</option>
+            <option value="final">Final Exam</option>
+          </select>
         </div>
-        <div class="generate-row">
-          <button type="submit" class="generate-btn" style="margin-top:0;width:100%;max-width:none;">Generate Timeline</button>
+        <div class="form-row">
+          <label for="start-date">Start Date</label>
+          <input type="date" id="start-date" readonly placeholder="Select from calendar">
         </div>
-      </form>
-      <div class="calendar-preview">
-        <div class="calendar-title">
-          <button id="prev-month" style="background:none;border:none;font-size:1.2em;cursor:pointer;">&#8592;</button>
-          <span id="calendar-month-label"></span>
-          <button id="next-month" style="background:none;border:none;font-size:1.2em;cursor:pointer;">&#8594;</button>
-          <select id="calendar-year" style="font-size:1em;margin-left:8px;"></select>
+        <div class="form-row">
+          <label for="due-date">Due Date</label>
+          <input type="date" id="due-date" readonly placeholder="Select from calendar">
         </div>
-        <div id="calendar-select-mode" style="margin-bottom:8px; font-weight:bold; color:#a009d7;">
-          Select Start Date
         </div>
-        <div class="warnings" aria-hidden="false" style="display:flex;flex-direction:column;gap:12px;margin-bottom:18px;">
-          <div id="deadline-warning" class="warning-box" style="display:none;">⚠️ Your start and due dates are only 3 days apart or less. You run the risk of not finishing your assignment properly on time!</div>
-          <div id="short-deadline-warning" class="warning-box" style="display:none;">⚠️ Warning: The time between your start and due date is less than 5 days. This may not be enough time to complete the assignment. Consider contacting your professor for an extension.</div>
-        </div>
-        <div class="calendar-grid" id="calendar-grid">
-          <!-- Calendar will be rendered here -->
-        </div>
+        <button type="submit" class="btn btn-yellow">Generate Timeline</button>
+    </form>
+    <div class="calendar-preview">
+      <div class="calendar-title">
+        <button id="prev-month" style="background:none;border:none;font-size:1.2em;cursor:pointer;">&#8592;</button>
+        <span id="calendar-month-label"></span>
+        <button id="next-month" style="background:none;border:none;font-size:1.2em;cursor:pointer;">&#8594;</button>
+        <select id="calendar-year" style="font-size:1em;margin-left:8px;"></select>
+      </div>
+      <div id="calendar-select-mode" style="margin-bottom:8px; font-weight:bold; color:#a009d7;">
+        Select Start Date
+      </div>
+      <div class="warnings" aria-hidden="false" style="display:flex;flex-direction:column;gap:12px;margin-bottom:18px;">
+        <div id="deadline-warning" class="warning-box" style="display:none;">⚠️ Your start and due dates are only 3 days apart or less. You run the risk of not finishing your assignment properly on time!</div>
+        <div id="short-deadline-warning" class="warning-box" style="display:none;">⚠️ Warning: The time between your start and due date is less than 5 days. This may not be enough time to complete the assignment. Consider contacting your professor for an extension.</div>
+      </div>
+      <div id="calendar-grid">
+        <!-- Calendar will be rendered here -->
+      </div>
   <!-- warnings were moved to the card bottom-right -->
-        <div style="margin-top:12px; display:flex; gap:10px;">
-          <button id="select-start-btn" type="button" class="generate-btn" style="background:#a009d7;color:#fff;font-size:1em;padding:8px 12px;width:auto;">Select Start Date</button>
-          <button id="select-due-btn" type="button" class="generate-btn" style="background:#1857b8;color:#fff;font-size:1em;padding:8px 12px;width:auto;">Select Due Date</button>
-        </div>
+      <div style="margin-top:12px; display:flex; gap:10px;">
+        <button id="select-start-btn" type="button" class="btn btn-purple">Select Start Date</button>
+        <button id="select-due-btn" type="button" class="btn btn-blue">Select Due Date</button>
       </div>
-  </div>
+    </div>
+</div>
 
-    <div id="timeline-breakdown" style="margin-top:24px;"></div>
-  </div>
-    </div>
-    <div class="sidebar slide-fade delay-5">
-      <div class="sidebar-group">
-        <div class="sidebar-group-title" style="color:#222; font-size:1.5em; font-weight:bold; margin-bottom:16px; display:flex; align-items:center; font-family:'Segoe UI', Arial, sans-serif; letter-spacing:1px;">
-          <span class="emoji" style="font-size:1.2em; margin-right:8px;">📚</span> Study Support
-        </div>
-        <button class="sidebar-btn-new sidebar-btn-yellow" onclick="window.open('https://www.torontomu.ca/first-year-engineering-office/academic-support/engineering-aces/', '_blank')">Engineering ACES</button>
-        <button class="sidebar-btn-new sidebar-btn-yellow" onclick="window.open('https://www.torontomu.ca/student-life-and-learning/learning-support/math-support/', '_blank')">SLLS Math Tutoring</button>
-        <button class="sidebar-btn-new sidebar-btn-yellow" onclick="window.open('https://www.youtube.com/watch?v=gEh5bCdIyP8', '_blank')">OneNote Tutorial</button>
-        <button class="sidebar-btn-new sidebar-btn-blue" onclick="window.open('https://www.torontomu.ca/current-students/grades-standings/gpa-calculation/#!accordion-1616785862084-sample-gpa-calculation', '_blank')">GPA Calculator</button>
-        <button class="sidebar-btn-new sidebar-btn-blue" onclick="window.open('https://docs.google.com/spreadsheets/d/1aEGwJgybMqa_tTf5M2BcKwx5S-bFzynp-PvdP6Gx618/edit?gid=1592973167#gid=1592973167', '_blank')">FYEO Workload Calendar</button>
-        <button class="sidebar-btn-new sidebar-btn-blue" onclick="window.open('https://docs.google.com/document/d/1U1pZkdf9pdaMgoWZuWzx5oP8bMG9GuEzyqk9oEb4S0E/edit?tab=t.0', '_blank')">FYEO Exam Tips</button>
-        <button class="sidebar-btn-new sidebar-btn-blue" onclick="window.open('https://www.torontomu.ca/first-year-engineering-office/academic-support/student-learning-support/', '_blank')">FYEO Exam Tips</button>
-        <button class="sidebar-btn-new sidebar-btn-blue" onclick="window.open('https://www.youtube.com/playlist?list=PL81FaJT60qwfXpTbXWY0LCbeONVzfpEmj', '_blank')">YouTube x-by-Step Guides</button>
+<div id="timeline-breakdown" style="margin-top:24px;"></div>
+</div>
+<div class="sidebar slide-fade delay-5">
+  <div class="sidebar-group">
+    <div class="sidebar-group-title" class="sidebar-group-title">
+    <span class="emoji" style="font-size:1.2em; margin-right:8px;">📚</span>
+      <span>Study Support</span>
       </div>
-      <div class="sidebar-group">
-        <div class="sidebar-group-title" style="color:#222; font-size:1.5em; font-weight:bold; margin-bottom:16px; display:flex; align-items:center; font-family:'Segoe UI', Arial, sans-serif; letter-spacing:1px;">
-          <span class="emoji" style="font-size:1.2em; margin-right:8px;">🎓</span> Academic Support
-        </div>
-        <button class="sidebar-btn-new sidebar-btn-yellow" onclick="window.open('https://www.torontomu.ca/first-year-engineering-office/academic-support/academic-advising/', '_blank')">Virtual Advising Room</button>
-        <button class="sidebar-btn-new sidebar-btn-blue" onclick="window.open('https://www.torontomu.ca/engineering-architectural-science/current-students/current-undergraduate/transition-program/', '_blank')">Transition Program</button>
-        <button class="sidebar-btn-new sidebar-btn-blue" onclick="window.open('https://www.torontomu.ca/first-year-engineering-office/academic-support/academic-support/#:~:text=Programs%20for%20Academic%20Success&text=First%20Year%20in%20Two%20Years,courses%20over%20two%20academic%20years.', '_blank')">First-Year in Two</button>
-        <button class="sidebar-btn-new sidebar-btn-blue" onclick="window.open('https://www.youtube.com/@FirstYearEngineeringOffice', '_blank')">YouTube Step-by-Step Guides</button>
-      </div>
-    </div>
+    <button class="btn btn-yellow" onclick="window.open('https://www.torontomu.ca/first-year-engineering-office/academic-support/engineering-aces/', '_blank')">Engineering ACES</button>
+    <button class="btn btn-yellow" onclick="window.open('https://www.torontomu.ca/student-life-and-learning/learning-support/math-support/', '_blank')">SLLS Math Tutoring</button>
+    <button class="btn btn-yellow" onclick="window.open('https://www.youtube.com/watch?v=gEh5bCdIyP8', '_blank')">OneNote Tutorial</button>
+    <button class="btn btn-blue" onclick="window.open('https://www.torontomu.ca/current-students/grades-standings/gpa-calculation/#!accordion-1616785862084-sample-gpa-calculation', '_blank')">GPA Calculator</button>
+    <button class="btn btn-blue" onclick="window.open('https://docs.google.com/spreadsheets/d/1aEGwJgybMqa_tTf5M2BcKwx5S-bFzynp-PvdP6Gx618/edit?gid=1592973167#gid=1592973167', '_blank')">FYEO Workload Calendar</button>
+    <button class="btn btn-blue" onclick="window.open('https://docs.google.com/document/d/1U1pZkdf9pdaMgoWZuWzx5oP8bMG9GuEzyqk9oEb4S0E/edit?tab=t.0', '_blank')">FYEO Exam Tips</button>
+    <button class="btn btn-blue" onclick="window.open('https://www.torontomu.ca/first-year-engineering-office/academic-support/student-learning-support/', '_blank')">FYEO Exam Tips</button>
+    <button class="btn btn-blue" onclick="window.open('https://www.youtube.com/playlist?list=PL81FaJT60qwfXpTbXWY0LCbeONVzfpEmj', '_blank')">YouTube x-by-Step Guides</button>
   </div>
+  <div class="sidebar-group">
+    <div class="sidebar-group-title" style="color:#222; font-size:1.5em; font-weight:bold; margin-bottom:16px; display:flex; align-items:center; font-family:'Segoe UI', Arial, sans-serif; letter-spacing:1px;">
+      <span class="emoji" style="font-size:1.2em; margin-right:8px;">🎓</span> Academic Support
+    </div>
+    <button class="btn btn-yellow" onclick="window.open('https://www.torontomu.ca/first-year-engineering-office/academic-support/academic-advising/', '_blank')">Virtual Advising Room</button>
+    <button class="btn btn-blue" onclick="window.open('https://www.torontomu.ca/engineering-architectural-science/current-students/current-undergraduate/transition-program/', '_blank')">Transition Program</button>
+    <button class="btn btn-blue" onclick="window.open('https://www.torontomu.ca/first-year-engineering-office/academic-support/academic-support/#:~:text=Programs%20for%20Academic%20Success&text=First%20Year%20in%20Two%20Years,courses%20over%20two%20academic%20years.', '_blank')">First-Year in Two</button>
+    <button class="btn btn-blue" onclick="window.open('https://www.youtube.com/@FirstYearEngineeringOffice', '_blank')">YouTube Step-by-Step Guides</button>
+  </div>
+</div>
   <!-- Place this OUTSIDE and BELOW the content-row -->
   <!-- <div id="planning-guide-container" style="width:100%; display:flex; justify-content:center; margin-top:40px;">
     <div id="planning-guide" style="width:100%; max-width:700px;"></div>

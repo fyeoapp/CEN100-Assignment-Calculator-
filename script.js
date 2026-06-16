@@ -24,18 +24,18 @@ const shortDeadlineWarning = document.getElementById('short-deadline-warning');
 
 const assignmentSelectEl = document.getElementById('assignment-select');
 const assignmentHeader = document.createElement('div');
-assignmentHeader.id = "assignment-header";
+// assignmentHeader.id = "assignment-header";
 assignmentHeader.style = "color:#fff;font-size:1.3em;font-weight:bold;margin:18px 0 8px 0;";
 const assignmentDesc = document.createElement('div');
 assignmentDesc.id = "assignment-desc";
 assignmentDesc.style = "color:#fff;font-size:1em;margin-bottom:8px;";
 const dueDateInputEl = document.getElementById('due-date');
 
-const formRow = document.querySelector('.form-row');
-  if (formRow && !document.getElementById('assignment-header')) {
-    formRow.parentNode.insertBefore(assignmentHeader, formRow);
-    formRow.parentNode.insertBefore(assignmentDesc, formRow);
-  }
+// const formRow = document.querySelector('.form-row');
+//   if (formRow && !document.getElementById('assignment-header')) {
+//     formRow.parentNode.insertBefore(assignmentHeader, formRow);
+//     formRow.parentNode.insertBefore(assignmentDesc, formRow);
+//   }
 
 assignmentSelectEl.addEventListener('change', function() {
     const val = assignmentSelectEl.value;
