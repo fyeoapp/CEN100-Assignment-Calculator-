@@ -11,7 +11,7 @@
  
 </head>
 <body>
-  <div class="main-header-bar">
+  <header class="main-header-bar">
     <div class="main-header-left">
       <span class="main-header-icon" aria-hidden="true">
         <img id="calculator-img" src="newcalculatorlogo.png" alt="Calculator">
@@ -21,27 +21,164 @@
     <div class="main-header-actions">
       <button class="btn btn-yellow desktop-only" onclick="window.open('https://www.torontomu.ca/calendar/2025-2026/dates/', '_blank')">📅 Significant Dates Calendar</button>
       <button class="btn btn-yellow desktop-only" onclick="window.open('https://www.torontomu.ca/first-year-engineering-office/', '_blank')">📍 First-Year Engineering Office</button>
-      <button class="btn btn-yellow desktop-only" onclick="window.open('https://www.torontomu.ca/first-year-engineering-office/faq/', '_blank')">❓ FAQs</button>
-      <!-- Mobile-only support drawer toggle (shown via CSS at small widths) -->
-      <button id="support-menu-toggle" class="btn btn-yellow" aria-controls="support-drawer" aria-expanded="false" title="Support menu">☰ Support</button>
-      <div id="support-drawer" role="dialog" aria-modal="true" aria-hidden="false">
-        <div class="support-backdrop" tabindex="-1" data-action="backdrop"></div>
-        <div class="support-panel" role="document" aria-labelledby="support-drawer-title">
-          <div class="drawer-header">
-            <div id="support-drawer-title" style="font-weight:bold;font-size:1.15em;">Support & Resources</div>
-          <div>
-            <button class="drawer-close" aria-label="Close support menu" data-action="close">✕</button>
-          </div>
-        </div>
-        <div class="drawer-content" id="support-drawer-content" aria-live="polite">
-        <!-- Cloned support groups will be inserted here on first open -->
-      </div>
+      <button class="btn btn-yellow desktop-only" onclick="window.open('https://www.torontomu.ca/first-year-engineering-office/faq/', '_blank')">❓ FAQs</button> 
+      <button id="menuBtn" class="menu-btn mobile-only" aria-label="Open menu" aria-expanded="false" aria-controls="menuPanel"  >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
-  </div>
-    </div>
-  </div>
-  <!-- Support drawer (mobile) - content is cloned from existing sidebar and right-support groups -->
+  </header>
+
+  <div class="overlay" id="overlay"></div>
   
+  <nav class="menu-panel" id="menuPanel" aria-hidden="true">
+    <div class="menu-group">
+      <a class="menu-link" href="https://www.torontomu.ca/calendar/2025-2026/dates/" target="_blank" rel="noopener noreferrer">
+        <span>📅</span> Significant Dates calendar
+        <span> 
+          <img class="ext-icon" src="images/external-link.png" alt="">
+        </span>
+      </a>
+      <a class="menu-link" href="https://www.torontomu.ca/first-year-engineering-office/" target="_blank" rel="noopener noreferrer">
+        <span>📍</span> First-Year Engineering Office
+        <span> 
+          <img class="ext-icon" src="images/external-link.png" alt="">
+        </span>
+      </a>
+      <a class="menu-link" href="https://www.torontomu.ca/first-year-engineering-office/faq/" target="_blank" rel="noopener noreferrer">
+        <span>❓</span> FAQs
+        <span> 
+          <img class="ext-icon" src="images/external-link.png" alt="">
+        </span>
+      </a>
+    </div>
+
+    <div class="menu-group">
+      <h3 class="menu-group-title">Study Support</h3>
+      <a class="menu-link" href="https://www.torontomu.ca/first-year-engineering-office/academic-support/engineering-aces/" target="_blank" rel="noopener noreferrer">
+        Engineering Aces
+        <span> 
+          <img class="ext-icon" src="images/external-link.png" alt="">
+        </span>
+      </a>
+      <a class="menu-link" href="https://www.torontomu.ca/student-life-and-learning/learning-support/math-support/" target="_blank" rel="noopener noreferrer">
+        SLLS Math Tutoring
+        <span> 
+          <img class="ext-icon" src="images/external-link.png" alt="">
+        </span>
+      </a>
+      <a class="menu-link" href="https://www.youtube.com/watch?v=gEh5bCdIyP8" target="_blank" rel="noopener noreferrer">
+        OneNote Tutorial
+        <span> 
+          <img class="ext-icon" src="images/external-link.png" alt="">
+        </span>
+      </a>
+      <a class="menu-link" href="https://www.torontomu.ca/current-students/grades-standings/gpa-calculation/#!accordion-1616785862084-sample-gpa-calculation" target="_blank" rel="noopener noreferrer">
+        GPA Calculator
+        <span> 
+          <img class="ext-icon" src="images/external-link.png" alt="">
+        </span>
+      </a>
+      <a class="menu-link" href="https://docs.google.com/spreadsheets/d/1aEGwJgybMqa_tTf5M2BcKwx5S-bFzynp-PvdP6Gx618/edit?gid=1592973167#gid=1592973167" target="_blank" rel="noopener noreferrer">
+        FYEO Workload Calendar
+        <span> 
+          <img class="ext-icon" src="images/external-link.png" alt="">
+        </span>
+      </a>
+      <a class="menu-link" href="https://docs.google.com/document/d/1U1pZkdf9pdaMgoWZuWzx5oP8bMG9GuEzyqk9oEb4S0E/edit?tab=t.0" target="_blank" rel="noopener noreferrer">
+        FYEO Exam Tips
+        <span> 
+          <img class="ext-icon" src="images/external-link.png" alt="">
+        </span>
+      </a>
+      <a class="menu-link" href="https://www.torontomu.ca/first-year-engineering-office/academic-support/student-learning-support/" target="_blank" rel="noopener noreferrer">
+        Study Learning Resources
+        <span> 
+          <img class="ext-icon" src="images/external-link.png" alt="">
+        </span>
+      </a>
+      <a class="menu-link" href="https://www.youtube.com/playlist?list=PL81FaJT60qwfXpTbXWY0LCbeONVzfpEmj" target="_blank" rel="noopener noreferrer">
+        YouTube Step-by-Step Guides
+        <span> 
+          <img class="ext-icon" src="images/external-link.png" alt="">
+        </span>
+      </a>
+      <a class="menu-link" href="https://docs.google.com/spreadsheets/d/1aEGwJgybMqa_tTf5M2BcKwx5S-bFzynp-PvdP6Gx618/edit?gid=1592973167#gid=1592973167" target="_blank" rel="noopener noreferrer">
+        FYEO Workload Calendar
+        <span> 
+          <img class="ext-icon" src="images/external-link.png" alt="">
+        </span>
+      </a>
+      <a class="menu-link" href="https://docs.google.com/document/d/1U1pZkdf9pdaMgoWZuWzx5oP8bMG9GuEzyqk9oEb4S0E/edit?tab=t.0" target="_blank" rel="noopener noreferrer">
+        FYEO Exam Tips
+        <span> 
+          <img class="ext-icon" src="images/external-link.png" alt="">
+        </span>
+      </a>
+
+    
+    </div>
+
+    <div class="menu-group">
+      <h3 class="menu-group-title">Academic Support</h3>
+      <a class="menu-link" href="https://www.torontomu.ca/first-year-engineering-office/academic-support/academic-advising/" target="_blank" rel="noopener noreferrer">
+        Virtual Advising Room
+        <span> 
+          <img class="ext-icon" src="images/external-link.png" alt="">
+        </span>
+      </a>
+      <a class="menu-link" href="https://www.torontomu.ca/engineering-architectural-science/current-students/current-undergraduate/transition-program/" target="_blank" rel="noopener noreferrer">
+        Transition Program
+        <span> 
+          <img class="ext-icon" src="images/external-link.png" alt="">
+        </span>
+      </a>
+      <a class="menu-link" href="https://www.torontomu.ca/first-year-engineering-office/academic-support/academic-support/#:~:text=Programs%20for%20Academic%20Success&text=First%20Year%20in%20Two%20Years,courses%20over%20two%20academic%20years" target="_blank" rel="noopener noreferrer">
+        First Year in Two
+        <span> 
+          <img class="ext-icon" src="images/external-link.png" alt="">
+        </span>
+      </a>
+    </div>
+    <div class="menu-group">
+      <h3 class="menu-group-title">Additional Support</h3>
+      <a class="menu-link" href="https://www.torontomu.ca/first-year-engineering-office/current-students/eng-handbook/" target="_blank" rel="noopener noreferrer">
+        Student Handbook
+        <span> 
+          <img class="ext-icon" src="images/external-link.png" alt="">
+        </span>
+      </a>
+      <a class="menu-link" href="https://www.torontomu.ca/first-year-engineering-office/orientation/first-year-ambassadors/" target="_blank" rel="noopener noreferrer">
+        First Year Ambassador
+        <span> 
+          <img class="ext-icon" src="images/external-link.png" alt="">
+        </span>
+      </a>
+      <a class="menu-link" href="https://apps.apple.com/ca/app/fyeng-mobile/id1148681745" target="_blank" rel="noopener noreferrer">
+        FYE Mobile App
+        <span> 
+          <img class="ext-icon" src="images/external-link.png" alt="">
+        </span>
+      </a>
+    </div>
+    <div class="menu-group">
+        <h3 class="menu-group-title">Group Assignment/ CEN100 Support</h3>
+        <a class="menu-link" href="https://www.torontomu.ca/policies/policy-list/conflict-interest-policy/" target="_blank" rel="noopener noreferrer">
+          Best Practices for Group Conflict
+          <span> 
+            <img class="ext-icon" src="images/external-link.png" alt="">
+          </span>
+        </a>
+        <a class="menu-link" href="https://www.torontomu.ca/contact/student/" target="_blank" rel="noopener noreferrer">
+          CEN100 Contact
+          <span> 
+            <img class="ext-icon" src="images/external-link.png" alt="">
+          </span>
+        </a>
+      </div>
+  </nav>
+
   <!-- Right column with centered logo -->
   <div class="logo-bg-column">
     <div class="right-support-group" >
@@ -99,11 +236,11 @@
         </div>
         <div class="form-row">
           <label for="start-date">Start Date</label>
-          <input type="date" id="start-date" readonly placeholder="Select from calendar">
+          <input type="text" id="start-date" readonly placeholder="Select from calendar">
         </div>
         <div class="form-row">
           <label for="due-date">Due Date</label>
-          <input type="date" id="due-date" readonly placeholder="Select from calendar">
+          <input type="text" id="due-date" readonly placeholder="Select from calendar">
         </div>
         </div>
         <button type="submit" class="btn btn-yellow">Generate Timeline</button>
@@ -147,8 +284,8 @@
     <button class="btn btn-blue" onclick="window.open('https://www.torontomu.ca/current-students/grades-standings/gpa-calculation/#!accordion-1616785862084-sample-gpa-calculation', '_blank')">GPA Calculator</button>
     <button class="btn btn-blue" onclick="window.open('https://docs.google.com/spreadsheets/d/1aEGwJgybMqa_tTf5M2BcKwx5S-bFzynp-PvdP6Gx618/edit?gid=1592973167#gid=1592973167', '_blank')">FYEO Workload Calendar</button>
     <button class="btn btn-blue" onclick="window.open('https://docs.google.com/document/d/1U1pZkdf9pdaMgoWZuWzx5oP8bMG9GuEzyqk9oEb4S0E/edit?tab=t.0', '_blank')">FYEO Exam Tips</button>
-    <button class="btn btn-blue" onclick="window.open('https://www.torontomu.ca/first-year-engineering-office/academic-support/student-learning-support/', '_blank')">FYEO Exam Tips</button>
-    <button class="btn btn-blue" onclick="window.open('https://www.youtube.com/playlist?list=PL81FaJT60qwfXpTbXWY0LCbeONVzfpEmj', '_blank')">YouTube x-by-Step Guides</button>
+    <button class="btn btn-blue" onclick="window.open('https://www.torontomu.ca/first-year-engineering-office/academic-support/student-learning-support/', '_blank')">Study Learning Resources</button>
+    <button class="btn btn-blue" onclick="window.open('https://www.youtube.com/playlist?list=PL81FaJT60qwfXpTbXWY0LCbeONVzfpEmj', '_blank')">YouTube Step-by-Step Guides</button>
   </div>
   <div class="sidebar-group">
     <div class="sidebar-group-title" style="color:#222; font-size:1.5em; font-weight:bold; margin-bottom:16px; display:flex; align-items:center; font-family:'Segoe UI', Arial, sans-serif; letter-spacing:1px;">
@@ -157,7 +294,6 @@
     <button class="btn btn-yellow" onclick="window.open('https://www.torontomu.ca/first-year-engineering-office/academic-support/academic-advising/', '_blank')">Virtual Advising Room</button>
     <button class="btn btn-blue" onclick="window.open('https://www.torontomu.ca/engineering-architectural-science/current-students/current-undergraduate/transition-program/', '_blank')">Transition Program</button>
     <button class="btn btn-blue" onclick="window.open('https://www.torontomu.ca/first-year-engineering-office/academic-support/academic-support/#:~:text=Programs%20for%20Academic%20Success&text=First%20Year%20in%20Two%20Years,courses%20over%20two%20academic%20years.', '_blank')">First-Year in Two</button>
-    <button class="btn btn-blue" onclick="window.open('https://www.youtube.com/@FirstYearEngineeringOffice', '_blank')">YouTube Step-by-Step Guides</button>
   </div>
 </div>
   <!-- Place this OUTSIDE and BELOW the content-row -->

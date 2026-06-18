@@ -6,6 +6,7 @@
   --header-bg: #a009d7;
   --header-title: #ffffff;
   --image-bg: #7a07a8;
+  
   --sidebar-bg: #eceaea;     
   --sidebar-title: #fff;
   --sidebar-btn-bg: #a009d7;
@@ -33,7 +34,8 @@
 /* Enforce a single, consistent UI font across the app */
 html, body, h1, h2, h3, h4, h5, h6,
 button, input, select, textarea, a, span, div, p, li,
-.header, .title, .main-header-bar, .main-header-title, .desktop-only
+.header, .title, .main-header-bar, .main-header-title, 
+.menu-group, .menu-group-title,.desktop-only
 .sidebar, .sidebar-group, .sidebar-group-title, .sidebar-btn, .form-row
 .right-support-group, .right-support-title, .right-btn,
 .center-welcome-container, .center-welcome-title, .center-welcome-desc,
@@ -57,7 +59,7 @@ body {
   min-height: 100vh;
   margin: 0;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: flex-start;
   position: relative;
 }
@@ -135,8 +137,125 @@ body.dark-mode .fyeo-announcements-content {
 
 @media(max-width: 1000px){
   .desktop-only {
-    display: none !important
+    display: none !important;
   }
+}
+
+@media(min-width: 1000px){
+  .mobile-only{
+    display: none !important;
+  }
+}
+
+.menu-btn{
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  padding: 0;
+}
+
+.menu-btn span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background:#f4f4f5;
+  border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+
+.menu-btn.open span:nth-child(1){
+  transform: translateY(7px) rotate(45deg);
+}
+
+.menu-btn.open span:nth-child(2){
+  opacity:0;
+}
+
+.menu-btn.open span:nth-child(3){
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+.menu-panel{
+  position: fixed;
+  top: 20px;
+  right: 0;
+  height: 90%;
+  width: min(200px, 85vw);
+  background:#ffe14df6;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  z-index: 3000;
+  overflow-y: auto;
+  overflow-x: auto;
+  padding: 80px 24px 24px;
+  border-left: 1px solid #222222c5;
+  overscroll-behavior: contain;
+}
+
+.menu-panel.open{
+  transform: translateX(0);
+}
+
+
+.menu-group {
+  margin-bottom: 28px;
+}
+
+/* Add a divider line to every group except the very first one */
+.menu-group + .menu-group {
+  border-top: 1px solid #000000; /* Very light gray */
+  padding-top: 1rem;
+  margin-top: 1rem;
+}
+
+.menu-group-title {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin: 0 0 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.menu-link {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 8px;
+  padding: 12px 10px;
+  border-radius: 8px;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.98rem;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.ext-icon{
+  width: 15px;
+  height: 15px;
+  align-items: flex-end;
+}
+
+.overlay{
+  position:fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  z-index: 2000;
+}
+
+.overlay.visible{
+  opacity:1;
+  pointer-events: auto;
 }
 
 .sidebar {
@@ -258,6 +377,8 @@ body.dark-mode .fyeo-announcements-content {
   }
 
 }
+
+
 
 .assignment-controls{
   gap: 10px
@@ -459,7 +580,7 @@ body.dark-mode .fyeo-announcements-content {
   padding: 28px 32px 28px 28px;
   box-sizing: border-box;
   box-shadow: 0 2px 12px rgba(60,0,60,0.13);
-  z-index: 3000; /* Make sure this is higher than any other element */
+  z-index: 5000; /* Make sure this is higher than any other element */
   top: 0;
   left: 0;
   height: 80px;
@@ -811,7 +932,7 @@ body.dark-mode .fyeo-announcements-content {
   /* .main-header-bar { display: inline-flex !important; } */
 
   /* Show the support toggle button in the header */
-  #support-menu-toggle { display: inline-flex !important; }
+  /* #support-menu-toggle { display: inline-flex !important; } */
 
   /* Prevent page shift while drawer opens */
   /* body.support-drawer-open { overflow: hidden; } */
@@ -838,10 +959,12 @@ body.dark-mode .fyeo-announcements-content {
   /* html, body { overflow-x: hidden; } */
 }
 
+/* SUPPORT DRAWER */
+
 /* Support drawer base styles (hidden by default) */
-#support-drawer {
+/* #support-drawer {
   position: fixed;
-  top: 80px; /* align below header */
+  top: 80px; /* align below header 
   right: 0;
   left: 0;
   bottom: 0;
@@ -894,7 +1017,7 @@ body.dark-mode .fyeo-announcements-content {
 }
 #support-drawer .drawer-content > * {
   margin-bottom: 12px;
-}
+} */
 
 /* Extra code */
 

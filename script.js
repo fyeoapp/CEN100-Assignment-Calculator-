@@ -827,175 +827,33 @@ document.getElementById('timeline-breakdown').innerHTML = '';
 });
 
 // Mobile support drawer logic (clones existing sidebar and right-support groups)
-(() => {
-const TOGGLE_ID = 'support-menu-toggle';
-const DRAWER_ID = 'support-drawer';
-const DRAWER_CONTENT_ID = 'support-drawer-content';
 const MOBILE_BREAKPOINT_PX = 1000; // ~7 inches at 96dpi
 
-const toggleBtn = document.getElementById(TOGGLE_ID);
-const drawer = document.getElementById(DRAWER_ID);
-const drawerContent = document.getElementById(DRAWER_CONTENT_ID);
+const menuBtn = document.getElementById('menuBtn');
+const menuPanel = document.getElementById('menuPanel');
+const overlay = document.getElementById('overlay');
 const bodyEl = document.body;
 const sidebar = document.querySelector('.sidebar');
 const rightColumn = document.querySelector('.logo-bg-column');
 
-function openDrawer() {
-  if (!drawerContent.hasChildNodes()) {
-    // Clone sidebar groups
-    if (sidebar) {
-      sidebar.querySelectorAll('.sidebar-group').forEach(g => {
-        const copy = g.cloneNode(true);
-        // remove any layout-only width to fit drawer
-        copy.style.width = '100%';
-        drawerContent.appendChild(copy);
-      });
-    }
-    // Clone right-support groups
-    if (rightColumn) {
-      rightColumn.querySelectorAll('.right-support-group').forEach(g => {
-        const copy = g.cloneNode(true);
-        copy.style.width = '100%';
-        drawerContent.appendChild(copy);
-      });
-    }
-    // Move any standalone buttons (like footer block) into drawer
-    if (rightColumn) {
-      const footer = rightColumn.querySelector('[style*="First-Year\\nEngineering\\nOffice"]');
-      if (footer) drawerContent.appendChild(footer.cloneNode(true));
-    }
-    // cloned inline onclick attributes stay functional; ensure links open in new tab
-    drawerContent.querySelectorAll('button[onclick]').forEach(btn => {
-      // nothing to change - inline onclick will work on clones
-    });
-  }
-
-  // drawer.classList.add('active');
-  // // drawer.setAttribute('aria-hidden', 'false');
-  // if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'true');
-  // bodyEl.classList.add('support-drawer-open');
-  // // Focus management
-  // const closeBtn = drawer.querySelector('[data-action="close"]');
-  // if (closeBtn) closeBtn.focus();
+function toggleMenu(){
+  const isOpen = menuPanel.classList.toggle('open');
+  overlay.classList.toggle('visible', isOpen);
+  menuBtn.classList.toggle('open', isOpen);
+  menuBtn.setAttribute('aria-expanded', isOpen);
+  menuPanel.setAttribute('aria-hidden', !isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
 }
 
-function closeDrawer() {
-  drawer.classList.remove('active');
-  drawer.setAttribute('aria-hidden', 'true');
-  if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'false');
-  bodyEl.classList.remove('support-drawer-open');
-  if (toggleBtn) toggleBtn.focus();
+function closeMenu(){
+  menuPanel.classList.remove('open');
+  overlay.classList.remove('visible');
+  menuBtn.classList.remove('open');
+  menuBtn.setAttribute('aria-expanded', 'false');
+  menuPanel.setAttribute('aria-hidden', 'true');
+  document.style.overflow = '';
 }
 
-// Toggle handler
-if (toggleBtn && drawer) {
-  toggleBtn.addEventListener('click', () => {
-    const isOpen = drawer.classList.contains('active');
-    if (isOpen) closeDrawer(); else openDrawer();
-  });
-}
+menuBtn.addEventListener('click', toggleMenu);
+overlay.addEventListener('click', closeMenu);
 
-// Close buttons and backdrop
-drawer.addEventListener('click', (ev) => {
-  const action = ev.target.closest('[data-action]');
-  if (action) {
-    if (action.dataset.action === 'close' || action.dataset.action === 'backdrop') {
-      closeDrawer();
-    }
-  }
-});
-
-// Close on escape
-window.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && drawer.classList.contains('active')) {
-    closeDrawer();
-  }
-});
-
-// Auto close if user resizes above breakpoint
-window.addEventListener('resize', () => {
-  if (window.innerWidth > MOBILE_BREAKPOINT_PX && drawer.classList.contains('active')) {
-    closeDrawer();
-  }
-});
-
-// Ensure toggle button is hidden on larger screens initially
-function updateToggleVisibility() {
-  if (!toggleBtn) return;
-  if (window.innerWidth <= MOBILE_BREAKPOINT_PX) {
-    toggleBtn.style.display = '';
-  } else {
-    toggleBtn.style.display = 'none';
-  }
-}
-updateToggleVisibility();
-window.addEventListener('resize', updateToggleVisibility);
-})();
-
-(function(){
-  const toggle = document.getElementById('support-menu-toggle');
-  const drawer = document.getElementById('support-drawer');
-  const content = document.getElementById('support-drawer-content');
-  let populated = false;
-
-  function sanitizeClone(node) {
-    // remove any duplicate ids inside the clone to avoid collisions
-    node.querySelectorAll('[id]').forEach(el => el.removeAttribute('id'));
-    return node;
-  }
-
-  function populateDrawer() {
-    if (populated) return;
-    const nodes = document.querySelectorAll('.sidebar-group, .right-support-group');
-    nodes.forEach(n => {
-      const clone = sanitizeClone(n.cloneNode(true));
-      // ensure cloned buttons are tabbable and visible
-      clone.querySelectorAll('button, a').forEach(el => {
-        el.setAttribute('tabindex', '0');
-      });
-      content.appendChild(clone);
-    });
-    populated = true;
-  }
-
-  function openDrawer() {
-    populateDrawer();
-    drawer.classList.add('active');
-    drawer.setAttribute('aria-hidden', 'false');
-    document.body.classList.add('support-drawer-open');
-    if (toggle) toggle.setAttribute('aria-expanded', 'true');
-    // move focus into drawer
-    const first = content.querySelector('button, a');
-    if (first) first.focus();
-  }
-
-  function closeDrawer() {
-    drawer.classList.remove('active');
-    drawer.setAttribute('aria-hidden', 'true');
-    document.body.classList.remove('support-drawer-open');
-    if (toggle) toggle.setAttribute('aria-expanded', 'false');
-    if (toggle) toggle.focus();
-  }
-
-  if (toggle && drawer && content) {
-    toggle.addEventListener('click', () => {
-      if (drawer.classList.contains('active')) closeDrawer();
-      else openDrawer();
-    });
-
-    // backdrop / close button handling (supports both data-action and click on backdrop)
-    drawer.addEventListener('click', (e) => {
-      if (e.target.dataset.action === 'backdrop' || e.target.dataset.action === 'close' || e.target.classList.contains('support-backdrop')) {
-        closeDrawer();
-      }
-    });
-
-    // delegated close buttons inside drawer (if any)
-    drawer.querySelectorAll('[data-action="close"]').forEach(btn => btn.addEventListener('click', closeDrawer));
-
-    // close on escape
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && drawer.classList.contains('active')) closeDrawer();
-    });
-  }
-})();
