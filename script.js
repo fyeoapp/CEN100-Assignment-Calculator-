@@ -285,6 +285,10 @@ yearSelect.onchange = function() {
   renderCalendar();
 };
 
+
+
+
+
 // ///////////////////////////////////////FOR DARK MODE/////////////////////////////////
 // 
 // const modeToggle = document.getElementById('mode-toggle');
@@ -831,6 +835,7 @@ const MOBILE_BREAKPOINT_PX = 1000; // ~7 inches at 96dpi
 
 const menuBtn = document.getElementById('menuBtn');
 const menuPanel = document.getElementById('menuPanel');
+const menuLinks = menuPanel.querySelectorAll('a');
 const overlay = document.getElementById('overlay');
 const bodyEl = document.body;
 const sidebar = document.querySelector('.sidebar');
@@ -843,6 +848,13 @@ function toggleMenu(){
   menuBtn.setAttribute('aria-expanded', isOpen);
   menuPanel.setAttribute('aria-hidden', !isOpen);
   document.body.style.overflow = isOpen ? 'hidden' : '';
+  menuLinks.forEach(link => {
+    if (isOpen) {
+      link.removeAttribute('tabindex');
+    } else {
+      link.setAttribute('tabindex', '-1');
+    }
+  });
 }
 
 function closeMenu(){
@@ -851,7 +863,12 @@ function closeMenu(){
   menuBtn.classList.remove('open');
   menuBtn.setAttribute('aria-expanded', 'false');
   menuPanel.setAttribute('aria-hidden', 'true');
-  document.style.overflow = '';
+
+  document.body.style.overflow = ''; 
+  
+  menuLinks.forEach(link => {
+    link.setAttribute('tabindex', '-1');
+  });
 }
 
 menuBtn.addEventListener('click', toggleMenu);

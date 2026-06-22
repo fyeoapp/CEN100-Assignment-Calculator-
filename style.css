@@ -135,13 +135,13 @@ body.dark-mode .fyeo-announcements-content {
   display: inline-block
 }
 
-@media(max-width: 1000px){
+@media(max-width: 1200px){
   .desktop-only {
     display: none !important;
   }
 }
 
-@media(min-width: 1000px){
+@media(min-width: 1200px){
   .mobile-only{
     display: none !important;
   }
@@ -201,6 +201,15 @@ body.dark-mode .fyeo-announcements-content {
 
 .menu-panel.open{
   transform: translateX(0);
+}
+
+.menu-panel[aria-hidden="true"] {
+    display: none; 
+  }
+
+/* When the menu is open/active */
+.menu-panel[aria-hidden="false"] {
+    display: block;
 }
 
 
@@ -335,7 +344,8 @@ body.dark-mode .fyeo-announcements-content {
   gap: 8px;
 }
 .sidebar-group-title .emoji {
-  font-size: 1.1em;
+  font-size:1.2em; 
+  margin-right:8px;
 }
 
 .btn:hover {
@@ -343,7 +353,7 @@ body.dark-mode .fyeo-announcements-content {
   transform: translateY(-2px) scale(1.03);
 }
 
-@media(max-width: 900px){
+@media(max-width: 1200px){
   .sidebar{
     display: none !important;
     position: static;
@@ -417,7 +427,12 @@ body.dark-mode .fyeo-announcements-content {
   box-sizing: border-box;
 }
 
-.center-form-card .assignment-controls {display: flex; flex-direction: column; gap: 12px; }
+.center-form-card .assignment-controls {
+  display: flex; 
+  flex-direction: column; 
+  gap: 12px; 
+  width: 100%;
+}
 .center-form-card .warnings { display: flex; position: static; align-items: flex-start; }
 @media (max-width: 900px) {
   .center-form-card {
@@ -472,6 +487,7 @@ body.dark-mode .fyeo-announcements-content {
 
 .form-row label {
   color: var(--form-label);
+
   font-size: 1.08em;
   margin-bottom: 6px;
 }
@@ -538,14 +554,18 @@ body.dark-mode .fyeo-announcements-content {
 
 .right-support-title {
   color:#222;
-  font-size: 1.5em;
+  font-size: 1.2em;
   margin-bottom: 16px;
+  width: 100%;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
 }
 
 .right-support-title .emoji {
-  font-size: 1em; /* reduced */
+  font-size:1.2em; 
+  margin-right: 12px;
+  justify-content: flex-start;
 }
 
 .right-fyeo-footer {
@@ -587,7 +607,7 @@ body.dark-mode .fyeo-announcements-content {
   overflow: hidden;
 }
 
-@media(max-width: 1100px){
+@media(max-width: 1000px){
   .main-header-bar {
     padding: 12px 14px;
     height: auto;
@@ -616,7 +636,7 @@ body.dark-mode .fyeo-announcements-content {
 
 @media(max-width: 1100px){
   .main-header-title {
-    font-size: 1.05em;
+    font-size: 1.2em;
     white-space: normal;
   }
 }
@@ -636,7 +656,7 @@ body.dark-mode .fyeo-announcements-content {
   width: 100%;
 }
 
-@media(max-width: 1100px){
+@media(max-width: 1000px){
   .center-welcome-title{
     margin-top: 6px !important; 
     font-size: 1.3em !important;
@@ -777,16 +797,32 @@ body.dark-mode .fyeo-announcements-content {
 
 .calendar-title {
   display: inline-flex;
+  width: 90%;
   font-size: 1.15em;
   color: #7a07a8;
   margin-bottom: 8px;
 }
 
-@media(max-width: 1100px){
+@media(max-width: 1000px){
   .calendar-title{
     font-size: 1em;
   }
 }
+
+.month-btn{
+  border: none;
+  background: none;
+}
+
+.calendar-arrow{
+  height: 25px;
+  width: 25px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color:#7a7fdc
+}
+
 #calendar-grid {
   display: flex;
   flex-direction: column;
@@ -876,7 +912,7 @@ body.dark-mode .fyeo-announcements-content {
     }
   
 
-@media (max-width: 1100px) {
+@media (max-width: 1000px) {
   /* .main-header-actions {
     gap: 10px;
     display: flexbox;
@@ -923,7 +959,7 @@ body.dark-mode .fyeo-announcements-content {
 } */
 
 /* ==== Mobile support drawer (approx. < 7" = 672px) ==== */
-@media (max-width: 1000px) {
+@media (max-width: 1200px) {
   /* Hide sidebar and right column when using the drawer */
   /* .sidebar { display: none !important; } */
   .logo-bg-column { display: none !important; }
@@ -958,6 +994,8 @@ body.dark-mode .fyeo-announcements-content {
   /* Ensure no horizontal overflow */
   /* html, body { overflow-x: hidden; } */
 }
+
+
 
 /* SUPPORT DRAWER */
 

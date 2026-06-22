@@ -14,7 +14,7 @@
   <header class="main-header-bar">
     <div class="main-header-left">
       <span class="main-header-icon" aria-hidden="true">
-        <img id="calculator-img" src="newcalculatorlogo.png" alt="Calculator">
+        <img id="calculator-img" src="images/newcalculatorlogo.png" alt="Calculator">
       </span>
       <span class="main-header-title">CEN100 Assignment Calculator</span>
     </div>
@@ -183,16 +183,15 @@
   <div class="logo-bg-column">
     <div class="right-support-group" >
       <div class="right-support-title">
-        <span class="emoji" style="font-size:1.2em; margin-right:8px;">➕ Additional Support </span>
+        <span class="emoji" >➕ </span>Additional Support </span>
       </div>
       <button class="btn btn-yellow" onclick="window.open('https://www.torontomu.ca/first-year-engineering-office/current-students/eng-handbook/', '_blank')">Student Handbook</button>
       <button class="btn btn-yellow" onclick="window.open('https://www.torontomu.ca/first-year-engineering-office/orientation/first-year-ambassadors/', '_blank')">First-Year Ambassador</button>
       <button class="btn btn-yellow" onclick="window.open('https://apps.apple.com/ca/app/fyeng-mobile/id1148681745', '_blank')">FYEng Mobile App</button>
     </div>
     <div class="right-support-group">
-      <div class="right-support-title" style="color:#222; font-size:1.5em; font-weight:bold; margin-bottom:16px; display:flex; align-items:center; flex-wrap:wrap;">
-        <span class="emoji" style="font-size:1.2em; margin-right:8px;">🏫</span>
-        <span style="display:inline-block;">Group Assignment/CEN100 Support</span>
+      <div class="right-support-title">
+        <span class="emoji">🏫</span>Group Assignment/ CEN100 Support
       </div>
       <button class="btn btn-blue"  onclick="window.open('https://www.torontomu.ca/policies/policy-list/conflict-interest-policy/', '_blank')">Best Practices for Group Conflict</button>
       <button class="btn btn-blue" onclick="window.open('https://www.torontomu.ca/contact/student/', '_blank')">CEN100 Contact</button>
@@ -243,13 +242,16 @@
           <input type="text" id="due-date" readonly placeholder="Select from calendar">
         </div>
         </div>
-        <button type="submit" class="btn btn-yellow">Generate Timeline</button>
-    </form>
-    <div class="calendar-preview">
+        <div class="calendar-preview">
       <div class="calendar-title">
-        <button id="prev-month" style="background:none;border:none;font-size:1.2em;cursor:pointer;">&#8592;</button>
+        <button id="prev-month" class="month-btn">
+          <img src="images/next.png" alt="left arrow" class="calendar-arrow" style="rotate: 180deg;">
+        </button>
         <span id="calendar-month-label"></span>
-        <button id="next-month" style="background:none;border:none;font-size:1.2em;cursor:pointer;">&#8594;</button>
+        <button id="next-month" class="month-btn">
+          <img src="images/next.png" alt="right arrow" class="calendar-arrow">
+        </button>
+        <label for="calendar-year">Select Year:</label>
         <select id="calendar-year" style="font-size:1em;margin-left:8px;"></select>
       </div>
       <div id="calendar-select-mode" style="margin-bottom:8px; font-weight:bold; color:#a009d7;">
@@ -268,6 +270,9 @@
         <button id="select-due-btn" type="button" class="btn btn-blue">Select Due Date</button>
       </div>
     </div>
+        <button type="submit" class="btn btn-yellow">Generate Timeline</button>
+    </form>
+    
 </div>
 
 <div id="timeline-breakdown" style="margin-top:24px;"></div>
