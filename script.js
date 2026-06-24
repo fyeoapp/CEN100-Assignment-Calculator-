@@ -12,10 +12,10 @@ const selectDueBtn = document.getElementById('select-due-btn');
 //   <select id="calendar-year" style="font-size:1em;margin-left:8px;"></select>
 // `;
 
-const monthLabel = document.getElementById('calendar-month-label');
+// const monthLabel = document.getElementById('calendar-month-label');
 const prevMonthBtn = document.getElementById('prev-month');
 const nextMonthBtn = document.getElementById('next-month');
-const yearSelect = document.getElementById('calendar-year');
+// const yearSelect = document.getElementById('calendar-year');
 
 const startDateInput = document.getElementById('start-date');
 const dueDateInput = document.getElementById('due-date');
@@ -42,7 +42,7 @@ assignmentSelectEl.addEventListener('change', function() {
     if (assignmentDetails[val]) {
       assignmentHeader.innerHTML = assignmentDetails[val].header;
       assignmentDesc.innerHTML = assignmentDetails[val].description;
-      dueDateInputEl.value = assignmentDetails[val].dueDate;
+      // dueDateInputEl.value = assignmentDetails[val].dueDate;
     } else {
       assignmentHeader.innerHTML = "";
       assignmentDesc.innerHTML = "";
@@ -150,23 +150,21 @@ const assignmentDetails = {
 };
 
 
-let selecting = 'start'; // 'start' or 'due'
-let selectedStart = null;
-let selectedDue = null;
-let calendarMonth = 8; // 0-indexed: 8 = September
-let calendarYear = 2026;
+// let selecting = 'start'; // 'start' or 'due'
+// let selectedStart = null;
+// let selectedDue = null;
+// let calendarMonth = 8; // 0-indexed: 8 = September
+// let calendarYear = 2026;
 
 // Populate year dropdown (2022-2028 as example)
-for (let y = 2022; y <= 2028; y++) {
-  const opt = document.createElement('option');
-  opt.value = y;
-  opt.textContent = y;
-  if (y === calendarYear) opt.selected = true;
-  yearSelect.appendChild(opt);
-}
+// for (let y = 2022; y <= 2028; y++) {
+//   const opt = document.createElement('option');
+//   opt.value = y;
+//   opt.textContent = y;
+//   if (y === calendarYear) opt.selected = true;
+//   yearSelect.appendChild(opt);
+// }
 
-startDateInput.addEventListener('change', checkDeadlineWarning);
-dueDateInput.addEventListener('change', checkDeadlineWarning);
 
 function getMonthName(monthIdx) {
   return [
@@ -175,115 +173,245 @@ function getMonthName(monthIdx) {
   ][monthIdx];
 }
 
+const today = new Date();
+let viewYear = today.getFullYear();
+let viewMonth = today.getMonth();
+let startDate = null, endDate = null, selectingEnd = false;
+
+const months=[
+  'January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December'
+];
+
+const fmt = d => d
+  ? `${months[d.getMonth()].slice(0,3)} ${d.getDate()} ${d.getFullYear()}`
+  : '-';
+
+const sameDay = (a,b) =>
+  a && b &&
+  a.getFullYear() === b.getFullYear() &&
+  a.getMonth() === b.getMonth() &&
+  a.getDate() === b.getDate();
+
+const daysInMonth = (y,m) => new Date(y, m + 1, 0).getDate();
+
+const monthLabel = document.getElementById('monthLabel');
+const yearSelect = document.getElementById('yearSelect');
+const daysGrid = document.getElementById('daysGrid');
+const startDisplay= document.getElementById('startDisplay');
+const endDisplay = document.getElementById('endDisplay');
+
+for (let y = today.getFullYear() - 5; y <= today.getFullYear() + 5; y++) {
+  const opt = document.createElement('option');
+  opt.value = y;
+  opt.textContent = y;
+  if (y === today.getFullYear()) opt.selected = true;
+  yearSelect.appendChild(opt);
+}
+
 function checkDeadlineWarning() {
-  const start = new Date(startDateInput.value);
-  const due = new Date(dueDateInput.value);
-  if (start && due && !isNaN(start) && !isNaN(due)) {
-    const diffTime = due - start;
+  const start = startDate;
+  const end = endDate;
+
+  if (start && end) {
+    const diffTime = end - start;
     const diffDays = diffTime / (1000 * 60 * 60 * 24);
+
     if (diffDays <= 3) {
-      warningDiv.style.display = 'block';
+      // Trigger smooth show for critical warning
+      warningDiv.classList.add('show');
+      shortDeadlineWarning.classList.remove('show');
+    } else if (diffDays < 5) {
+      // Trigger smooth show for moderate warning
+      warningDiv.classList.remove('show');
+      shortDeadlineWarning.classList.add('show');
     } else {
-      warningDiv.style.display = 'none';
+      // Hide both smoothly
+      warningDiv.classList.remove('show');
+      shortDeadlineWarning.classList.remove('show');
     }
-    // Show new warning if less than 5 days
-    if (diffDays < 5) {
-      shortDeadlineWarning.style.display = 'block';
-    } else {
-      shortDeadlineWarning.style.display = 'none';
-    }
+    
   } else {
-    warningDiv.style.display = 'none';
-    shortDeadlineWarning.style.display = 'none';
+    warningDiv.classList.remove('show');
+    shortDeadlineWarning.classList.remove('show');
   }
 }
 
+function updateFooter() {
+  startDisplay.textContent = fmt(startDate);
+  endDisplay.textContent   = fmt(endDate);
 
-function renderCalendar() {
-  monthLabel.textContent = `${getMonthName(calendarMonth)} ${calendarYear}`;
-  calendarGrid.innerHTML = '';
-  const headerRow = document.createElement('div');
-  headerRow.className = 'calendar-row calendar-header';
-  ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].forEach(d => {
-    const span = document.createElement('span');
-    span.textContent = d;
-    headerRow.appendChild(span);
-  });
-  calendarGrid.appendChild(headerRow);
+}
 
-  const firstDay = new Date(calendarYear, calendarMonth, 1).getDay();
-  const daysInMonth = new Date(calendarYear, calendarMonth + 1, 0).getDate();
+function renderCalendar(){
+  monthLabel.textContent = `${months[viewMonth]} ${viewYear}`;
+  const dim = daysInMonth(viewYear, viewMonth)
+  const firstDow = new Date(viewYear, viewMonth, 1).getDay();
+  daysGrid.innerHTML='';
 
-  let day = 1;
-  for (let week = 0; week < 6;  week++) {
-    const row = document.createElement('div');
-    row.className = 'calendar-row';
-    for (let dow = 0; dow < 7; dow++) {
-      const cell = document.createElement('span');
-      if ((week === 0 && dow < firstDay) || day > daysInMonth) {
-        cell.textContent = '';
-      } else {
-        cell.textContent = day;
-        cell.style.cursor = 'pointer';
-        const dateStr = `${calendarYear}-${String(calendarMonth+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
-        cell.dataset.date = dateStr;
-        if (selectedStart === dateStr) cell.classList.add('calendar-active');
-        if (selectedDue === dateStr) {
-          cell.style.background = '#1857b8';
-          cell.style.color = '#fff';
-        }
-        cell.onclick = function() {
-          if (selecting === 'start') {
-            selectedStart = dateStr;
-            startDateInput.value = selectedStart;
-          } else {
-            selectedDue = dateStr;
-            dueDateInput.value = selectedDue;
-          }
-          renderCalendar();
-          checkDeadlineWarning(); // <-- Add this line
-        };
-        day++;
-      }
-      row.appendChild(cell);
+  for(let i = 0; i < firstDow; i++){
+    const el = document.createElement('div');
+    el.className='day empty';
+    daysGrid.appendChild(el);
+  }
+
+  for (let d = 1; d <= dim; d++){
+    const date = new Date(viewYear, viewMonth, d);
+    const el = document.createElement('div');
+    el.className='day';
+    el.textContent=d;
+
+    if (sameDay(date, today)) el.classList.add('today');
+    if (sameDay(date, startDate)) el.classList.add('selected-start');
+    if (sameDay(date, endDate)) el.classList.add('selected-end');
+    if (startDate && endDate && date > startDate && date < endDate){
+      el.classList.add('in-range');
     }
-    calendarGrid.appendChild(row);
-    if (day > daysInMonth) break;
+    el.addEventListener('click', () => onDayClick(date));
+    daysGrid.appendChild(el);
   }
 }
+
+function onDayClick(date){
+  if(!startDate ||(startDate && endDate)){
+    startDate = date;
+    endDate = null;
+    selectingEnd = true;
+  }
+  else if (selectingEnd){
+    if(date< startDate) {
+      endDate = startDate;
+      startDate = date;
+    }
+    else endDate = date;
+    selectingEnd = false;
+  }
+  updateFooter();
+  renderCalendar();
+  checkDeadlineWarning();
+}
+
+document.getElementById('prevBtn').onclick = () => {
+  viewMonth--;
+  if (viewMonth < 0) { viewMonth = 11; viewYear--; }
+  yearSelect.value = viewYear;
+  renderCalendar();
+};
+
+document.getElementById('nextBtn').onclick = () => {
+  viewMonth++;
+  if (viewMonth > 11) { viewMonth = 0; viewYear++; }
+  yearSelect.value = viewYear;
+  renderCalendar();
+};
+
+yearSelect.onchange = () => {
+  viewYear = parseInt(yearSelect.value);
+  renderCalendar();
+};
+
+document.getElementById('clearBtn').onclick = () => {
+  startDate    = null;
+  endDate      = null;
+  selectingEnd = false;
+  updateFooter();
+  renderCalendar();
+};
+
+
 renderCalendar();
+updateFooter();
 
-selectStartBtn.onclick = function() {
-  selecting = 'start';
-  calendarSelectMode.textContent = 'Select Start Date';
-};
-selectDueBtn.onclick = function() {
-  selecting = 'due';
-  calendarSelectMode.textContent = 'Select Due Date';
-};
 
-prevMonthBtn.onclick = function() {
-  calendarMonth--;
-  if (calendarMonth < 0) {
-    calendarMonth = 11;
-    calendarYear--;
-    yearSelect.value = calendarYear;
-  }
-  renderCalendar();
-};
-nextMonthBtn.onclick = function() {
-  calendarMonth++;
-  if (calendarMonth > 11) {
-    calendarMonth = 0;
-    calendarYear++;
-    yearSelect.value = calendarYear;
-  }
-  renderCalendar();
-};
-yearSelect.onchange = function() {
-  calendarYear = parseInt(yearSelect.value, 10);
-  renderCalendar();
-};
+
+
+
+
+// function renderCalendar() {
+//   monthLabel.textContent = `${getMonthName(calendarMonth)} ${calendarYear}`;
+//   calendarGrid.innerHTML = '';
+//   const headerRow = document.createElement('div');
+//   headerRow.className = 'calendar-row calendar-header';
+//   ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].forEach(d => {
+//     const span = document.createElement('span');
+//     span.textContent = d;
+//     headerRow.appendChild(span);
+//   });
+//   calendarGrid.appendChild(headerRow);
+
+//   const firstDay = new Date().getDay();
+//   const daysInMonth = new Date(calendarYear, calendarMonth + 1, 0).getDate();
+
+//   let day = 1;
+//   for (let week = 0; week < 6;  week++) {
+//     const row = document.createElement('div');
+//     row.className = 'calendar-row';
+//     for (let dow = 0; dow < 7; dow++) {
+//       const cell = document.createElement('span');
+//       if ((week === 0 && dow < firstDay) || day > daysInMonth) {
+//         cell.textContent = '';
+//       } else {
+//         cell.textContent = day;
+//         cell.style.cursor = 'pointer';
+//         const dateStr = `${calendarYear}-${String(calendarMonth+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+//         cell.dataset.date = dateStr;
+//         if (selectedStart === dateStr) cell.classList.add('calendar-active');
+//         if (selectedDue === dateStr) {
+//           cell.style.background = '#1857b8';
+//           cell.style.color = '#fff';
+//         }
+//         cell.onclick = function() {
+//           if (selecting === 'start') {
+//             selectedStart = dateStr;
+//             startDateInput.value = selectedStart;
+//           } else {
+//             selectedDue = dateStr;
+//             dueDateInput.value = selectedDue;
+//           }
+//           renderCalendar();
+//           checkDeadlineWarning(); // <-- Add this line
+//         };
+//         day++;
+//       }
+//       row.appendChild(cell);
+//     }
+//     calendarGrid.appendChild(row);
+//     if (day > daysInMonth) break;
+//   }
+// }
+// renderCalendar();
+
+// selectStartBtn.onclick = function() {
+//   selecting = 'start';
+//   calendarSelectMode.textContent = 'Select Start Date';
+// };
+// selectDueBtn.onclick = function() {
+//   selecting = 'due';
+//   calendarSelectMode.textContent = 'Select Due Date';
+// };
+
+// prevMonthBtn.onclick = function() {
+//   calendarMonth--;
+//   if (calendarMonth < 0) {
+//     calendarMonth = 11;
+//     calendarYear--;
+//     yearSelect.value = calendarYear;
+//   }
+//   renderCalendar();
+// };
+// nextMonthBtn.onclick = function() {
+//   calendarMonth++;
+//   if (calendarMonth > 11) {
+//     calendarMonth = 0;
+//     calendarYear++;
+//     yearSelect.value = calendarYear;
+//   }
+//   renderCalendar();
+// };
+// yearSelect.onchange = function() {
+//   calendarYear = parseInt(yearSelect.value, 10);
+//   renderCalendar();
+// };
 
 
 
@@ -326,9 +454,9 @@ document.getElementById('assignment-form').addEventListener('submit', function(e
 // });
 
 const assignment = document.getElementById('assignment-select').value;
-const start = startDateInput.value;
-const due = dueDateInput.value;
-const breakdownDiv = document.getElementById('timeline-breakdown');
+const start = startDisplay.textContent;
+const due = endDisplay.textContent;
+const breakdownDiv = document.getElementById('timelineBreakdown');
 
 if (!assignment || !start || !due) {
   breakdownDiv.innerHTML = `<div style="color:#d7263d;font-weight:bold;">Please select an assignment, start date, and due date.</div>`;
@@ -747,7 +875,7 @@ if (assignment === "email") {
 }
 
 breakdownDiv.innerHTML = `
-  <div style="background:#fffbe7;border-radius:18px;padding:32px 38px;margin-top:18px;box-shadow:0 4px 16px rgba(80,0,120,0.13); max-width:900px; font-size:1.22em;">
+  <div class="timeline">
     <div style="font-weight:bold;color:#a009d7;margin-bottom:18px;font-size:1.35em;">Step-by-Step Timeline:</div>
     <ol style="padding-left:32px;">
       ${steps.map(step => `<li style="margin-bottom:18px;line-height:1.7;">${step}</li>`).join('')}
@@ -827,7 +955,7 @@ setTimeout(() => {
 
 
 document.getElementById('assignment-form').addEventListener('input', function() {
-document.getElementById('timeline-breakdown').innerHTML = '';
+document.getElementById('timelineBreakdown').innerHTML = '';
 });
 
 // Mobile support drawer logic (clones existing sidebar and right-support groups)
@@ -873,4 +1001,6 @@ function closeMenu(){
 
 menuBtn.addEventListener('click', toggleMenu);
 overlay.addEventListener('click', closeMenu);
+
+
 

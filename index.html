@@ -213,7 +213,7 @@
       </div>
     </div>
   <div class="center-stepper">
-    <div class="step active"><span>1</span> Assignment Info</div>
+    <div class="step"><span>1</span> Assignment Info</div>
     <div class="step"><span>2</span> Generate Timeline</div>
     <div class="step"><span>3</span> Review &amp; Save</div>
   </div>
@@ -233,49 +233,64 @@
             <option value="final">Final Exam</option>
           </select>
         </div>
-        <div class="form-row">
+        <!-- <div class="form-row">
           <label for="start-date">Start Date</label>
           <input type="text" id="start-date" readonly placeholder="Select from calendar">
         </div>
         <div class="form-row">
           <label for="due-date">Due Date</label>
           <input type="text" id="due-date" readonly placeholder="Select from calendar">
+        </div> -->
         </div>
+       <div class="cal-card">
+        <div class="cal-header">
+          <button class="nav-btn" id="prevBtn" aria-label="Previous month">
+            <img src="images/next.png" alt="prev month btn" style="rotate: 180deg;">
+          </button>
+          <span class="month-label" id="monthLabel"></span>
+          <button class="nav-btn" id="nextBtn" aria-label="Next month">
+            <img src="images/next.png" alt="next month btn">
+          </button>
+         <select class="year-select" id="yearSelect" aria-label="Select year"></select>
         </div>
-        <div class="calendar-preview">
-      <div class="calendar-title">
-        <button id="prev-month" class="month-btn">
-          <img src="images/next.png" alt="left arrow" class="calendar-arrow" style="rotate: 180deg;">
-        </button>
-        <span id="calendar-month-label"></span>
-        <button id="next-month" class="month-btn">
-          <img src="images/next.png" alt="right arrow" class="calendar-arrow">
-        </button>
-        <label for="calendar-year">Select Year:</label>
-        <select id="calendar-year" style="font-size:1em;margin-left:8px;"></select>
+
+         <div class="warnings" aria-hidden="false" role="alert" aria-live="polite">
+            <div id="deadline-warning" class="warning-box" >⚠️ Your start and due dates are only 3 days apart or less. You run the risk of not finishing your assignment properly on time!</div>
+            <div id="short-deadline-warning" class="warning-box">⚠️ Warning: The time between your start and due date is less than 5 days. This may not be enough time to complete the assignment. Consider contacting your professor for an extension.</div>
+          </div>
+
+        <div id="calView">
+          <div class="weekdays">
+            <span>Sun</span><span>Mon</span><span>Tue</span>
+            <span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+          </div>
+        <div class="days" id="daysGrid"></div>
+        </div>
+
+        <div class="footer">
+         <div class="date-chip">
+          <div>
+            <span class="chip-label">Start</span>
+            <strong id="startDisplay">—</strong>
+          </div>
+        </div>
+          <div class="date-chip">
+            <div>
+              <span class="chip-label">End</span>
+              <strong id="endDisplay">—</strong>
+            </div>
+        </div>
+          <button class="clear-btn" id="clearBtn">Clear</button>
+        </div>
       </div>
-      <div id="calendar-select-mode" style="margin-bottom:8px; font-weight:bold; color:#a009d7;">
-        Select Start Date
-      </div>
-      <div class="warnings" aria-hidden="false" style="display:flex;flex-direction:column;gap:12px;margin-bottom:18px;">
-        <div id="deadline-warning" class="warning-box" style="display:none;">⚠️ Your start and due dates are only 3 days apart or less. You run the risk of not finishing your assignment properly on time!</div>
-        <div id="short-deadline-warning" class="warning-box" style="display:none;">⚠️ Warning: The time between your start and due date is less than 5 days. This may not be enough time to complete the assignment. Consider contacting your professor for an extension.</div>
-      </div>
-      <div id="calendar-grid">
-        <!-- Calendar will be rendered here -->
-      </div>
-  <!-- warnings were moved to the card bottom-right -->
-      <div style="margin-top:12px; display:flex; gap:10px;">
-        <button id="select-start-btn" type="button" class="btn btn-purple">Select Start Date</button>
-        <button id="select-due-btn" type="button" class="btn btn-blue">Select Due Date</button>
-      </div>
-    </div>
-        <button type="submit" class="btn btn-yellow">Generate Timeline</button>
-    </form>
-    
+      <button type="submit" class="btn btn-yellow">Generate Timeline</button>
+  </form>
+  </div>
+
+      
 </div>
 
-<div id="timeline-breakdown" style="margin-top:24px;"></div>
+<div id="timelineBreakdown" style="margin-top:24px; width: 100%"></div>
 </div>
 <div class="sidebar slide-fade delay-5">
   <div class="sidebar-group">
@@ -308,3 +323,32 @@
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </html>
+
+
+
+
+ <!-- <div class="calendar-preview">
+      <!-- <div class="calendar-title">
+        <button id="prev-month" class="month-btn">
+          <img src="images/next.png" alt="left arrow" class="calendar-arrow" style="rotate: 180deg;">
+        </button>
+        <span id="calendar-month-label"></span>
+        <button id="next-month" class="month-btn">
+          <img src="images/next.png" alt="right arrow" class="calendar-arrow">
+        </button>
+        <label for="calendar-year">Select Year:</label>
+        <select id="calendar-year" style="font-size:1em;margin-left:8px;"></select>
+      </div>
+      <div id="calendar-select-mode" style="margin-bottom:8px; font-weight:bold; color:#a009d7;">
+        Select Start Date
+      </div>
+      
+      <div id="calendar-grid">
+        <!-- Calendar will be rendered here\
+      </div>
+  <!-- warnings were moved to the card bottom-right
+      <div style="margin-top:12px; display:flex; gap:10px;">
+        <button id="select-start-btn" type="button" class="btn btn-purple">Select Start Date</button>
+        <button id="select-due-btn" type="button" class="btn btn-blue">Select Due Date</button>
+      </div>
+    </div> -->
