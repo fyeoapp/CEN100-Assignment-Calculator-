@@ -183,10 +183,15 @@ const months=[
   'July', 'August', 'September', 'October', 'November', 'December'
 ];
 
-const fmt = d => d
-  ? `${months[d.getMonth()].slice(0,3)} ${d.getDate()} ${d.getFullYear()}`
-  : '-';
+const pad = n => String(n).padStart(2, '0');
 
+const fmt = d => {
+  if (!d) return '';
+  const year  = d.getFullYear();
+  const month = pad(d.getMonth() + 1);
+  const day   = pad(d.getDate());
+  return `${year}-${month}-${day}`;
+};
 const sameDay = (a,b) =>
   a && b &&
   a.getFullYear() === b.getFullYear() &&
@@ -238,8 +243,8 @@ function checkDeadlineWarning() {
 }
 
 function updateFooter() {
-  startDisplay.textContent = fmt(startDate);
-  endDisplay.textContent   = fmt(endDate);
+  startDisplay.value = fmt(startDate);
+  endDisplay.value   = fmt(endDate);
 
 }
 
@@ -317,6 +322,69 @@ document.getElementById('clearBtn').onclick = () => {
   updateFooter();
   renderCalendar();
 };
+
+document.getElementById('generateBtn').onclick = () => {
+  const timelineDiv = document.getElementById('timelineBreakdown')
+  timelineDiv.classList.add('show');
+  requestAnimationFrame(() => {
+    timelineDiv.scrollIntoView({ 
+      behavior: "smooth", 
+      block: "start" 
+    });
+  });
+};
+
+function parseInput(str) {
+  const parts = str.split('-');              // ["2026", "06", "15"]
+  if (parts.length !== 3) return null;
+
+  const year  = parseInt(parts[0]);
+  const month = parseInt(parts[1]) - 1;     // back to zero-indexed for Date constructor
+  const day   = parseInt(parts[2]);
+
+  if (isNaN(year) || isNaN(month) || isNaN(day)) return null;
+
+  const d = new Date(year, month, day);     // local time, no UTC shift
+
+  // Validate the date is real (e.g. rejects Feb 30)
+  if (d.getFullYear() !== year || d.getMonth() !== month || d.getDate() !== day) return null;
+
+  return d;
+}
+
+startDisplay.addEventListener('change', () => {
+  console.log(startDisplay.value);
+  const parsed = parseInput(startDisplay.value);
+  console.log(parsed);
+  if (parsed) {
+    startDate = parsed;
+    if (endDate && startDate > endDate) endDate = null;
+    viewYear  = startDate.getFullYear();
+    viewMonth = startDate.getMonth();
+    yearSelect.value = viewYear;
+    renderCalendar();
+    updateFooter();
+  } else {
+    startDisplay.value = fmt(startDate);
+  }
+});
+
+endDisplay.addEventListener('change', () => {
+  const parsed = parseInput(endDisplay.value);
+  if (parsed) {
+    endDate = parsed;
+    if (startDate && endDate < startDate) {
+      [startDate, endDate] = [endDate, startDate];
+    }
+    viewYear  = endDate.getFullYear();
+    viewMonth = endDate.getMonth();
+    yearSelect.value = viewYear;
+    renderCalendar();
+    updateFooter();
+  } else {
+    endDisplay.value = fmt(endDate);
+  }
+});
 
 
 renderCalendar();
@@ -454,18 +522,18 @@ document.getElementById('assignment-form').addEventListener('submit', function(e
 // });
 
 const assignment = document.getElementById('assignment-select').value;
-const start = startDisplay.textContent;
-const due = endDisplay.textContent;
+const start = startDisplay.value;
+const due = endDisplay.value;
 const breakdownDiv = document.getElementById('timelineBreakdown');
 
 if (!assignment || !start || !due) {
-  breakdownDiv.innerHTML = `<div style="color:#d7263d;font-weight:bold;">Please select an assignment, start date, and due date.</div>`;
+  breakdownDiv.innerHTML = `<div style="color:#d7263d;font-weight:bold; justify-content: center; align-content: center;">Please select an assignment, start date, and due date.</div>`;
   return;
 }
 
-const startDate = new Date(start);
-const dueDate = new Date(due);
-const days = Math.floor((dueDate - startDate) / (1000 * 60 * 60 * 24));
+const startDay = new Date(start);
+const dueDay = new Date(due);
+const days = Math.floor((dueDay - startDay) / (1000 * 60 * 60 * 24));
 if (days < 0) {
   breakdownDiv.innerHTML = `<div style="color:#d7263d;font-weight:bold;">Due date must be after start date.</div>`;
   return;
@@ -875,7 +943,6 @@ if (assignment === "email") {
 }
 
 breakdownDiv.innerHTML = `
-  <div class="timeline">
     <div style="font-weight:bold;color:#a009d7;margin-bottom:18px;font-size:1.35em;">Step-by-Step Timeline:</div>
     <ol style="padding-left:32px;">
       ${steps.map(step => `<li style="margin-bottom:18px;line-height:1.7;">${step}</li>`).join('')}
@@ -889,11 +956,9 @@ breakdownDiv.innerHTML = `
         📝 Calculator Feedback
       </button>
     </div>
-  </div>
 `;
 
 // Scroll to the timeline breakdown after generating it
-breakdownDiv.scrollIntoView({ behavior: "smooth", block: "start" });
 
 // Add PDF download logic
 setTimeout(() => {
@@ -958,8 +1023,7 @@ document.getElementById('assignment-form').addEventListener('input', function() 
 document.getElementById('timelineBreakdown').innerHTML = '';
 });
 
-// Mobile support drawer logic (clones existing sidebar and right-support groups)
-const MOBILE_BREAKPOINT_PX = 1000; // ~7 inches at 96dpi
+
 
 const menuBtn = document.getElementById('menuBtn');
 const menuPanel = document.getElementById('menuPanel');

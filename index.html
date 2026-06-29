@@ -267,34 +267,34 @@
         <div class="days" id="daysGrid"></div>
         </div>
 
-        <div class="footer">
+        <div class="cal-footer">
          <div class="date-chip">
           <div>
             <span class="chip-label">Start</span>
-            <strong id="startDisplay">—</strong>
+            <input id="startDisplay" type="text" placeholder="YYYY-MM-DD" aria-label="Start date">
           </div>
         </div>
           <div class="date-chip">
             <div>
               <span class="chip-label">End</span>
-              <strong id="endDisplay">—</strong>
+              <input id="endDisplay" type="text" placeholder="YYYY-MM-DD" aria-label="End date">
             </div>
         </div>
-          <button class="clear-btn" id="clearBtn">Clear</button>
+          <button class="clear-btn btn-yellow" id="clearBtn">Clear</button>
         </div>
       </div>
-      <button type="submit" class="btn btn-yellow">Generate Timeline</button>
+      <button id="generateBtn" type="submit" class="btn btn-yellow">Generate Timeline</button>
   </form>
   </div>
-
+  <div id="timelineBreakdown" class="timeline"></div>
       
 </div>
 
-<div id="timelineBreakdown" style="margin-top:24px; width: 100%"></div>
+
 </div>
 <div class="sidebar slide-fade delay-5">
   <div class="sidebar-group">
-    <div class="sidebar-group-title" class="sidebar-group-title">
+    <div class="sidebar-group-title">
     <span class="emoji" style="font-size:1.2em; margin-right:8px;">📚</span>
       <span>Study Support</span>
       </div>
@@ -308,8 +308,8 @@
     <button class="btn btn-blue" onclick="window.open('https://www.youtube.com/playlist?list=PL81FaJT60qwfXpTbXWY0LCbeONVzfpEmj', '_blank')">YouTube Step-by-Step Guides</button>
   </div>
   <div class="sidebar-group">
-    <div class="sidebar-group-title" style="color:#222; font-size:1.5em; font-weight:bold; margin-bottom:16px; display:flex; align-items:center; font-family:'Segoe UI', Arial, sans-serif; letter-spacing:1px;">
-      <span class="emoji" style="font-size:1.2em; margin-right:8px;">🎓</span> Academic Support
+    <div class="sidebar-group-title">
+      <span class="emoji" style="font-size:1.2em; margin-right:8px;">🎓</span><span>Academic Support</span> 
     </div>
     <button class="btn btn-yellow" onclick="window.open('https://www.torontomu.ca/first-year-engineering-office/academic-support/academic-advising/', '_blank')">Virtual Advising Room</button>
     <button class="btn btn-blue" onclick="window.open('https://www.torontomu.ca/engineering-architectural-science/current-students/current-undergraduate/transition-program/', '_blank')">Transition Program</button>

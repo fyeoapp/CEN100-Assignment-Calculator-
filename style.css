@@ -121,8 +121,16 @@ body.dark-mode .fyeo-announcements-content {
 
 }
 
+button:focus, 
+a:focus, 
+select:focus,
+[tabindex]:focus {
+  outline: 3px solid #7F39FB;
+  outline-offset: 2px;       
+}
+
 .title {
-  font-size: 4em;
+  font-size: 1.2e,;
   color: var(--header-title);
   font-weight: bold;
   letter-spacing: 1.5px;
@@ -135,7 +143,7 @@ body.dark-mode .fyeo-announcements-content {
   display: inline-block
 }
 
-@media(max-width: 1200px){
+@media(max-width: 1199px){
   .desktop-only {
     display: none !important;
   }
@@ -286,6 +294,16 @@ body.dark-mode .fyeo-announcements-content {
   overscroll-behavior: contain;
 }
 
+.sidebar button:focus {
+  outline: none; /* Clear the clipped native outline */
+  
+  /* Create a thick, safe internal ring that never gets clipped by layout boundaries */
+  box-shadow: inset 0 0 0 3px #7F39FB; 
+  
+  /* Optional: Slightly shift background color to make the focus double-obvious */
+  background-color: rgba(127, 57, 251, 0.1); 
+}
+
 .btn {
   width: 100%;
   margin: 7px 0;
@@ -353,7 +371,7 @@ body.dark-mode .fyeo-announcements-content {
   transform: translateY(-2px) scale(1.03);
 }
 
-@media(max-width: 1200px){
+@media(max-width: 1199px){
   .sidebar{
     display: none !important;
     position: static;
@@ -406,6 +424,7 @@ body.dark-mode .fyeo-announcements-content {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  gap: 25px
 }
 
 .center-form-card {
@@ -598,20 +617,25 @@ body.dark-mode .fyeo-announcements-content {
 }
 .main-header-bar {
   width: 100vw;
+  height: 9%;
   background: #8a24a8;
   display: flex;
   position: fixed;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 28px 32px 28px 28px;
+  padding: 20px 32px 20px 28px;
   box-sizing: border-box;
   box-shadow: 0 2px 12px rgba(60,0,60,0.13);
   z-index: 5000; /* Make sure this is higher than any other element */
   top: 0;
   left: 0;
-  height: 80px;
   overflow: hidden;
+}
+
+.main-header-bar button:focus{
+  outline: 3px solid #ffffff;
+  outline-offset: 2px;
 }
 
 @media(max-width: 1000px){
@@ -830,51 +854,41 @@ body.dark-mode .fyeo-announcements-content {
 .day.in-range { background: #EEEDFE; color: #3C3489; }
 .day.selected-start,
 .day.selected-end {
-  background: #7F77DD;
+  background: #726bc6;
   color: #fff;
   border-color: #534AB7;
 }
 .day.today { border-color: #7F77DD; }
 
-.footer {
+.cal-footer {
   display: flex;
-  align-items: center;
-  gap: 10px;
+  align-items: flex-end;
+  gap: 25px;
   margin-top: 1.25rem;
 }
-.date-chip {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+.date-chip input {
+  background: transparent;
   font-size: 13px;
-  color: #666;
-  background: #f8f8fc;
-  border-radius: 8px;
-  padding: 8px 14px;
-  flex: 1;
-}
-.date-chip strong {
   color: #1a1a2e;
-  font-weight: 500;
-  display: block;
-  margin-top: 2px;
+  width: 100%;
+  padding: 5px;
+  cursor: text;
+  margin-right: 10px;
+  border-radius: 10px;
 }
-.chip-label {
-  font-size: 11px;
-  color: #6d6d6d;
-  display: block;
-}
+.date-chip input::placeholder { color: #aaa; font-weight: 400; }
+.date-chip input:focus { border-bottom: 1px solid #7F77DD; }
+
 .clear-btn {
-  background: none;
+
   border: 1px solid #e2e2ee;
   border-radius: 8px;
   padding: 8px 14px;
   font-size: 13px;
   cursor: pointer;
-  color: #666;
+  color: #000000;
   transition: background 0.15s;
 }
-.clear-btn:hover { background: #f3f3fb; }
 
 .calendar-preview {
   min-width: 260px;
@@ -1067,13 +1081,21 @@ body.dark-mode .fyeo-announcements-content {
     }
   
 .timeline{
+  display:none;
+}
+
+.timeline.show{
+  display: flex;
+  flex-direction: column;
   background:#fffbe7;
   border-radius: 18px;
   box-shadow: 0 4px 24px rgba(80,0,120,0.13);
   padding: 32px;
-  max-width: 700px;
+  width:100%;
+  max-width: 700px; 
   margin: 0 auto;
   box-sizing: border-box;
+  justify-content: center;
 }
 
 @media (max-width: 1000px) {
@@ -1123,7 +1145,7 @@ body.dark-mode .fyeo-announcements-content {
 } */
 
 /* ==== Mobile support drawer (approx. < 7" = 672px) ==== */
-@media (max-width: 1200px) {
+@media (max-width: 1199px) {
   /* Hide sidebar and right column when using the drawer */
   /* .sidebar { display: none !important; } */
   .logo-bg-column { display: none !important; }
