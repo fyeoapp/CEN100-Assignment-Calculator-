@@ -390,10 +390,39 @@ endDisplay.addEventListener('change', () => {
 renderCalendar();
 updateFooter();
 
+let touchStartX = 0;
+let touchStartY = 0;
 
+function isMobileWidth(){
+  return window.innerWidth < 1100;
+}
 
+daysGrid.addEventListener('touchstart', (e) => {
+  if (!isMobileWidth()) return;
+  touchStartX = e.changedTouches[0].screenX;
+  touchStartY = e.changedTouches[0].screenY;
+}, {passive: true});
 
+daysGrid.addEventListener('touchend', (e) => {
+  if (!isMobileWidth()) return;
+  
+  const touchEndX = e.changedTouches[0].screenX;
+  const touchEndY = e.changedTouches[0].screenY;
+  const diffX = touchEndX - touchStartX;
+  const diffY = touchEndY - touchStartY;
 
+  const SWIPE_THRESHOLD = 50;
+
+  //ignore mostly-vertical gestures 
+  if (Math.abs(diffX) < Math.abs(diffY)) return ;
+
+  if (diffX > SWIPE_THRESHOLD){
+    document.getElementById('prevBtn').click();
+  } else if (diffX < -SWIPE_THRESHOLD){
+    document.getElementById('nextBtn').click();
+  }
+
+}, {passive: true});
 
 // function renderCalendar() {
 //   monthLabel.textContent = `${getMonthName(calendarMonth)} ${calendarYear}`;
