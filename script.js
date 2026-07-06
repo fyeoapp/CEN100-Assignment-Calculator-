@@ -602,6 +602,8 @@ function generateStepRanges(breakdown, startDate, days) {
   return steps;
 }
 
+
+
 let steps = [];
 if (assignment === "email") {
   let breakdown = [
@@ -980,10 +982,6 @@ breakdownDiv.innerHTML = `
       <button id="download-timeline-btn" style="background:#ffe14d;color:#222;font-weight:bold;font-size:1.15em;border:none;border-radius:10px;padding:14px 32px;cursor:pointer;box-shadow:0 2px 8px rgba(80,0,120,0.08);">
         Save and Download
       </button>
-      <button id="feedback-btn" style="background:#1857b8;color:#fff;font-weight:600;font-size:1.13em;border:none;border-radius:10px;padding:14px 32px;cursor:pointer;box-shadow:0 2px 8px rgba(80,0,120,0.08);display:flex;align-items:center;gap:8px;"
-        onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLScGjoCU9KW7aR4jlmjI10SKbpqavCE4X8C2ceFkaLExmEQukg/viewform?usp=sharing&ouid=103979447744273921797', '_blank');">
-        📝 Calculator Feedback
-      </button>
     </div>
 `;
 
@@ -1060,7 +1058,7 @@ const menuLinks = menuPanel.querySelectorAll('a');
 const overlay = document.getElementById('overlay');
 const bodyEl = document.body;
 const sidebar = document.querySelector('.sidebar');
-const rightColumn = document.querySelector('.logo-bg-column');
+const rightColumn = document.querySelector('.right-column-menu');
 
 function toggleMenu(){
   const isOpen = menuPanel.classList.toggle('open');
