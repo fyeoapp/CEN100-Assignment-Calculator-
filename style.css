@@ -230,7 +230,7 @@ select:focus,
   border-top: 1px solid #000000; /* Very light gray */
   padding-top: 1rem;
   margin-top: 1rem;
-}
+}x
 
 .menu-group-title {
   text-transform: uppercase;
@@ -282,6 +282,7 @@ select:focus,
   padding-top: 1.5vw;
   padding-bottom: 16px;
   min-height: 0;
+  height: 100%;
   max-height: calc(100vh - 80px); /* Subtract header height */
   display: flex;
   flex-direction: column;
@@ -606,7 +607,7 @@ select:focus,
   border-radius: 12px; /* reduced */
   box-shadow: 0 2px 8px rgba(80,0,120,0.10);
   padding: 14px 8px 10px 8px; /* reduced */
-  margin-bottom: 16px; /* reduced */
+  margin-bottom: 5px; /* reduced */
   width: 90%; /* slightly smaller */
   display: flex;
   flex-direction: column;
@@ -858,6 +859,46 @@ select:focus,
   font-weight: 500;
   flex: 1;
   color: #1a1a2e;
+}
+
+.download-btn {
+  border-radius: 8px; /* Matches standard App Store button curves */
+  overflow: hidden;
+  border: none;
+  background-color: white;
+  width: 100%;
+}
+
+.download-btn img {
+  display: block;
+  /* Control the size of your button here */
+  width: 100%; 
+  height: auto;
+}
+
+.download-title {
+  font-size: 16px;
+  font-weight: bold !important;
+  margin-bottom: 10px;
+}
+
+.download-btn-container {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  flex-direction: row; 
+  background-color: transparent;
+  border: none;
+}
+
+/* Interactive Hover States */
+.store-btn:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+
+.store-btn:active {
+  transform: translateY(1px);
 }
 
 .year-select {
