@@ -978,8 +978,8 @@ breakdownDiv.innerHTML = `
     <ol style="padding-left:32px;">
       ${steps.map(step => `<li style="margin-bottom:18px;line-height:1.7;">${step}</li>`).join('')}
     </ol>
-    <div style="display:flex; gap:16px; margin-top:24px;">
-      <button id="download-timeline-btn" style="background:#ffe14d;color:#222;font-weight:bold;font-size:1.15em;border:none;border-radius:10px;padding:14px 32px;cursor:pointer;box-shadow:0 2px 8px rgba(80,0,120,0.08);">
+    <div style="display:flex; gap:16px; margin-top:24px;" justify content>
+      <button id="download-timeline-btn" class="btn btn-yellow">
         Save and Download
       </button>
     </div>

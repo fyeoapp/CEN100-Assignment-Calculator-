@@ -3,14 +3,14 @@
 :root {
   --page-bg: #fff;    
   --main-bg: #fff;    
-  --header-bg: #a009d7;
+  --header-bg:rgb(111, 40, 146);
   --header-title: #ffffff;
-  --image-bg: #7a07a8;
+  --image-bg: rgb(111, 40, 146);
   
   --sidebar-bg: #eceaea;     
   --sidebar-title: #fff;
-  --sidebar-btn-bg: #a009d7;
-  --sidebar-btn-hover: #7a07a8;
+  --sidebar-btn-bg: rgb(111, 40, 146);
+  --sidebar-btn-hover: rgb(111, 40, 146);
   --sidebar-btn-library: #952335;
   --sidebar-btn-data: #1b537a;
   --sidebar-btn-it: #6b184a;
@@ -633,10 +633,12 @@ select:focus,
   align-items:flex-start;
   border: #000000;
   box-shadow: #000000;
+  border-radius: 10px;
 }
 
 .footer-logo-container{
   border-radius: 10px;
+  background-color: rgb(111, 40, 146)
 }
 
 .reminder-box {
