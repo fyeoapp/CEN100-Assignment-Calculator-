@@ -891,6 +891,7 @@ select:focus,
   flex-direction: row; 
   background-color: transparent;
   border: none;
+  margin-bottom: 10px;
 }
 
 /* Interactive Hover States */
