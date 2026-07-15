@@ -653,9 +653,10 @@ select:focus,
 
 .reminder-box p {
   margin: 0;
-  font-size: 13px;
-  color: #664d03;
+  font-size: 15px;
+  color: #000000;
   line-height: 1.4;
+  font-weight: bold;
 }
 
 .checkbox-container {
