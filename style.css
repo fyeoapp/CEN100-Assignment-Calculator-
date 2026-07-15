@@ -129,6 +129,14 @@ select:focus,
   outline-offset: 2px;       
 }
 
+#assignment-select:focus, 
+#generateBtn:focus,
+.sidebar button:focus,
+.main-header-bar button:focus{
+   outline: 3px solid #ffffff;
+  outline-offset: 2px; 
+}
+
 .title {
   font-size: 1.2e,;
   color: var(--header-title);
@@ -295,15 +303,6 @@ select:focus,
   overscroll-behavior: contain;
 }
 
-.sidebar button:focus {
-  outline: none; /* Clear the clipped native outline */
-  
-  /* Create a thick, safe internal ring that never gets clipped by layout boundaries */
-  box-shadow: inset 0 0 0 3px #7F39FB; 
-  
-  /* Optional: Slightly shift background color to make the focus double-obvious */
-  background-color: rgba(127, 57, 251, 0.1); 
-}
 
 .btn {
   width: 100%;
@@ -540,6 +539,7 @@ select:focus,
   margin-right: 0; */
 }
 
+
 #calculator-img{
   width:100%;
   height: 100%;
@@ -693,11 +693,6 @@ select:focus,
   top: 0;
   left: 0;
   overflow: hidden;
-}
-
-.main-header-bar button:focus{
-  outline: 3px solid #ffffff;
-  outline-offset: 2px;
 }
 
 @media(max-width: 1000px){
@@ -971,7 +966,6 @@ select:focus,
 }
 .date-chip input {
   background: transparent;
-  font-size: 1em;
   color: #1a1a2e;
   width: 100%;
   padding: 5px;
